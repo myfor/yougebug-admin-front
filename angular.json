@@ -24,6 +24,7 @@
               "src/assets"
             ],
             "styles": [
+              "src/styles.scss",
               "src/styles.css"
             ],
             "scripts": []
@@ -57,17 +58,30 @@
                   "maximumError": "10kb"
                 }
               ]
+            },
+            "hmr": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.hmr.ts"
+                }
+              ]
             }
           }
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "yougebug-admin-front:build"
+            "browserTarget": "yougebug-admin-front:build",
+            "proxyConfig": "proxy.config.js"
           },
           "configurations": {
             "production": {
               "browserTarget": "yougebug-admin-front:build:production"
+            },
+            "hmr": {
+              "hmr": true,
+              "browserTarget": "yougebug-admin-front:build:hmr"
             }
           }
         },
@@ -89,6 +103,7 @@
               "src/assets"
             ],
             "styles": [
+              "src/styles.scss",
               "src/styles.css"
             ],
             "scripts": []
@@ -120,6 +135,7 @@
           }
         }
       }
-    }},
+    }
+  },
   "defaultProject": "yougebug-admin-front"
 }
