@@ -6,8 +6,19 @@
       "icon": "dashboard",
       "badge": {
         "color": "red-500",
-        "value": "5"
+        "value": ""
       }
+    },
+    {
+      "state": "clients",
+      "name": "客户管理",
+      "type": "sub",
+      "icon": "person",
+      "children": [{
+        "state": "",
+        "name": "客户列表",
+        "type": "link"
+      }]
     },
     {
       "state": "sessions",

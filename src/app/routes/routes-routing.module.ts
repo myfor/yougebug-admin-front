@@ -21,10 +21,15 @@ const routes: Routes = [
         data: { title: 'Dashboard', titleI18n: 'dashboard' },
       },
       {
+        path: 'clients',
+        loadChildren: () => import('./clients/clients.module').then(mod => mod.ClientsModule),
+        data: { title: 'Clients', titleI18n: 'Clients' }
+      },
+      {
         path: 'sessions',
         loadChildren: () => import('./sessions/sessions.module').then(m => m.SessionsModule),
         data: { title: 'Sessions', titleI18n: 'Sessions' },
-      },
+      }
     ],
   },
   {
