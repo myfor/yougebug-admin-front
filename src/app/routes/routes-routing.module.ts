@@ -6,12 +6,13 @@ import { AdminLayoutComponent } from '../theme/admin-layout/admin-layout.compone
 import { AuthLayoutComponent } from '../theme/auth-layout/auth-layout.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './sessions/login/login.component';
-import { RegisterComponent } from './sessions/register/register.component';
+import { LoginGuard } from '../guard/login.guard';
 
 const routes: Routes = [
   {
     path: '',
     component: AdminLayoutComponent,
+    canActivate: [LoginGuard],
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       {
@@ -35,14 +36,18 @@ const routes: Routes = [
         component: LoginComponent,
         data: { title: 'Login', titleI18n: 'Login' },
       },
-      {
-        path: 'register',
-        component: RegisterComponent,
-        data: { title: 'Register', titleI18n: 'Register' },
-      },
+      // {
+      //   path: 'register',
+      //   component: RegisterComponent,
+      //   data: { title: 'Register', titleI18n: 'Register' },
+      // },
     ],
   },
-  { path: '**', redirectTo: 'dashboard' },
+  {
+    path: 'page',
+    loadChildren: () => import('./sessions/sessions.module').then(mod => mod.SessionsModule)
+  },
+  { path: '**', redirectTo: 'page/404' },
 ];
 
 @NgModule({
