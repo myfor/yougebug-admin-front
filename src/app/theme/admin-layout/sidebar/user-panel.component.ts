@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
     <div class="matero-user-panel" fxLayout="column" fxLayoutAlign="center center">
       <img
         class="matero-user-panel-avatar"
-        src="assets/images/avatar.jpg"
+        src="assets/images/avatar.png"
         alt="avatar"
         width="64"
       />
