@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { CommonService } from '../../../services/common.service';
+import { UsersService } from '../../../services/users/users.service';
 
 @Component({
   selector: 'app-user',
@@ -22,11 +25,27 @@ import { Component } from '@angular/core';
         <mat-icon>settings</mat-icon>
         <span>Settings</span>
       </a>
-      <a routerLink="/auth/login" mat-menu-item>
+      <a href="javascript:;" (click)="logout()" mat-menu-item>
         <mat-icon>exit_to_app</mat-icon>
         <span>Logout</span>
       </a>
     </mat-menu>
   `,
 })
-export class UserComponent {}
+export class UserComponent {
+  constructor(
+    private router: Router,
+    private common: CommonService,
+    private user: UsersService
+  ) {}
+
+  logout() {
+    this.user.logout().subscribe((result) => {
+      if (result.isFault) {
+        this.common.snackOpen('登出失败');
+        return;
+      }
+      this.router.navigateByUrl('/auth/login');
+    });
+  }
+}
