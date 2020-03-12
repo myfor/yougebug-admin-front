@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { KeyValue } from '@angular/common';
 
 @Component({
@@ -21,14 +21,18 @@ import { KeyValue } from '@angular/common';
     </mat-menu>
   `,
 })
-export class NotificationComponent {
-  notifyCount = 1;
+export class NotificationComponent implements OnInit {
+  notifyCount = 0;
   messages: KeyValue<number, string>[] = [
-    {
-      key: 1,
-      value: 'Server Error Reports'
-    }
+    // {
+    //   key: 1,
+    //   value: 'Server Error Reports'
+    // }
   ];
+
+  ngOnInit() {
+    this.notifyCount = this.messages.length;
+  }
 
   //  已读
   readed(index: number) {
