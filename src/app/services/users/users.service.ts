@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, from } from 'rxjs';
-import { ServicesBase, Result, ROUTER_RPEFIX } from '../common';
+import { ServicesBase, Result, ROUTER_PREFIX } from '../common';
 import { debounceTime, catchError } from 'rxjs/operators';
 
 import sha256 from 'crypto-js/sha256';
@@ -33,7 +33,7 @@ export class UsersService {
   login(loginInfo: LoginInfo): Observable<Result<UserInfo>> {
     loginInfo.password = sha256(loginInfo.password).toString();
 
-    const URL = `${ROUTER_RPEFIX}/api/login`;
+    const URL = `${ROUTER_PREFIX}/api/login`;
     return this.http.patch<Result<UserInfo>>(URL, loginInfo)
     .pipe(
       debounceTime(500),
@@ -42,7 +42,7 @@ export class UsersService {
   }
   //  登出
   logout(): Observable<Result> {
-    const URL = `${ROUTER_RPEFIX}/api/logout`;
+    const URL = `${ROUTER_PREFIX}/api/logout`;
     return this.http.patch<Result>(URL, '')
     .pipe(
       debounceTime(500),

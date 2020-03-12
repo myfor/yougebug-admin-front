@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ClientsService, ClientItem } from '../../../services/clients/clients.service';
 import { PageEvent } from '@angular/material';
+import { CommonService } from '../../../services/common.service';
 
 @Component({
   selector: 'app-clients-list',
@@ -9,7 +10,6 @@ import { PageEvent } from '@angular/material';
 })
 export class ClientsListComponent implements OnInit {
 
-  index = 0;
   size = 20;
   totalSize = 100;
 
@@ -18,12 +18,26 @@ export class ClientsListComponent implements OnInit {
   ];
   columnsToDisplay = ['userName', 'email', 'createDate', 'action'];
 
-  constructor() { }
+  constructor(
+    private client: ClientsService,
+    private common: CommonService
+  ) { }
 
   ngOnInit() {
+    //  this.getClientsList(1);
   }
 
   pageChange(page: PageEvent) {
-    this.index = page.pageIndex;
+    this.getClientsList(page.pageIndex);
+  }
+
+  private getClientsList(index: number) {
+    this.client.getClients(index).subscribe(result => {
+      if (result.isFault) {
+        this.common.snackOpen(result.message, 2000);
+        return;
+      }
+      this.dataSource = result.data.list;
+    });
   }
 }
