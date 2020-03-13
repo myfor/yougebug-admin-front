@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { ServicesBase, Paginator, Result, ROUTER_PREFIX } from '../common';
 import { Observable } from 'rxjs';
-import { catchError, debounceTime } from 'rxjs/operators';
+import { catchError, debounceTime, retry } from 'rxjs/operators';
 
 //  客户列表单项
 export class ClientItem {
@@ -10,6 +10,7 @@ export class ClientItem {
   userName: string;
   email: string;
   createDate: string;
+  state: number;
 }
 
 @Injectable({
@@ -24,16 +25,22 @@ export class ClientsService {
 
   //  获取客户列表
   getClients(index: number, size = 20, search = ''): Observable<Result<Paginator<ClientItem>>> {
-    if (!search) {
-      search = '';
+    const p = new HttpParams();
+
+    if (search) {
+      p.append('search', search);
     }
     if (index <= 0) {
       index = 1;
     }
-    const URL = `${ROUTER_PREFIX}`;
+    p.append('index', index.toString())
+      .append('size', size.toString());
+
+    const URL = `${ROUTER_PREFIX}/api/clients?${p.toString()}`;
     return this.http.get<Result<Paginator<ClientItem>>>(URL)
     .pipe(
       debounceTime(500),
+      retry(1),
       catchError(this.base.handleError)
     );
   }

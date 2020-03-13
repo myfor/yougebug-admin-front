@@ -14,7 +14,7 @@ export class ClientsListComponent implements OnInit {
   totalSize = 100;
 
   dataSource: ClientItem[] = [
-    { id: 1, userName: 'myfor', email: 'mfory@qq.com', createDate: '2020-20-20' }
+    //  { id: 1, userName: 'myfor', email: 'mfory@qq.com', createDate: '2020-20-20' }
   ];
   columnsToDisplay = ['userName', 'email', 'createDate', 'action'];
 
@@ -24,7 +24,7 @@ export class ClientsListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    //  this.getClientsList(1);
+    this.getClientsList(1);
   }
 
   pageChange(page: PageEvent) {
@@ -40,4 +40,6 @@ export class ClientsListComponent implements OnInit {
       this.dataSource = result.data.list;
     });
   }
+
+  
 }
