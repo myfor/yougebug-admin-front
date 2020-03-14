@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ClientsService, ClientItem } from '../../../services/clients/clients.service';
-import { PageEvent } from '@angular/material';
+import { PageEvent, MatSlideToggleChange } from '@angular/material';
 import { CommonService } from '../../../services/common.service';
 
 @Component({
@@ -14,7 +14,7 @@ export class ClientsListComponent implements OnInit {
   totalSize = 100;
 
   dataSource: ClientItem[] = [
-    //  { id: 1, userName: 'myfor', email: 'mfory@qq.com', createDate: '2020-20-20' }
+    { id: 1, userName: 'myfor', email: 'mfory@qq.com', createDate: '2020-20-20', state: 1 }
   ];
   columnsToDisplay = ['userName', 'email', 'createDate', 'action'];
 
@@ -41,5 +41,11 @@ export class ClientsListComponent implements OnInit {
     });
   }
 
-  
+  enabledOrDisabled(value: MatSlideToggleChange) {
+    if (value.checked) {
+      this.client.enabledClient(parseInt(value.source.id, null));
+    } else {
+      this.client.disabledClient(parseInt(value.source.id, null));
+    }
+  }
 }

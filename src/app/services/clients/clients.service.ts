@@ -44,4 +44,14 @@ export class ClientsService {
       catchError(this.base.handleError)
     );
   }
+
+  //  启用用户
+  enabledClient(id: number) {
+    console.log(`enabled ${id}`);
+  }
+
+  //  禁用用户
+  disabledClient(id: number) {
+    console.log(`disabled ${id}`);
+  }
 }

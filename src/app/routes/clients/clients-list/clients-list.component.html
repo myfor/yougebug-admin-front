@@ -15,7 +15,8 @@
   <ng-container matColumnDef="action">
     <th mat-header-cell *matHeaderCellDef>操作</th>
     <td mat-cell *matCellDef="let element">
-        <button mat-raised-button color="primary">按钮 {{element.id}}</button>
+      <mat-slide-toggle [checked]="element.state === 0" [id]="element.id" (change)="enabledOrDisabled($event)">禁用</mat-slide-toggle>
+      <a [routerLink]="['/clients', element.id]" mat-stroked-button color="primary">详情</a>
     </td>
   </ng-container>
 
