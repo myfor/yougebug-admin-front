@@ -19,6 +19,7 @@ export interface ClientDetail {
   email: string;
   avatar: string;
   state: number;
+  createDate: string;
 }
 
 @Injectable({

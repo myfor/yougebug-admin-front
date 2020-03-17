@@ -16,7 +16,8 @@ export class ClientsDetailComponent implements OnInit {
     userName: 'userName',
     email: 'email',
     avatar: 'assets/images/avatar.png',
-    state: 0
+    state: 0,
+    createDate: '2020-20-20'
   };
 
   constructor(

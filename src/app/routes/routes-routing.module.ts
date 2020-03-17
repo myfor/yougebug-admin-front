@@ -26,6 +26,11 @@ const routes: Routes = [
         data: { title: 'Clients', titleI18n: 'Clients' }
       },
       {
+        path: 'questions',
+        loadChildren: () => import('./questions/questions.module').then(mod => mod.QuestionsModule),
+        data: { title: 'Questions', titleI18n: 'Questions' }
+      },
+      {
         path: 'sessions',
         loadChildren: () => import('./sessions/sessions.module').then(m => m.SessionsModule),
         data: { title: 'Sessions', titleI18n: 'Sessions' },

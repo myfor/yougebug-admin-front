@@ -11,4 +11,10 @@
   <img class="avatar" src="{{detail.avatar}}" alt="头像" height="128" width="128">
   <br>
   <mat-slide-toggle [checked]="detail.state === 0" [id]="id" (change)="enabledOrDisabled($event)">禁用</mat-slide-toggle>
+  <br>
+  <mat-form-field>
+    <input matInput placeholder="创建日期" readonly value="{{detail.createDate}}">
+  </mat-form-field>
+  <br>
+  <app-back></app-back>
 </div>

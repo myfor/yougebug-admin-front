@@ -14,7 +14,7 @@ export class ClientsListComponent implements OnInit {
   totalSize = 100;
 
   dataSource: ClientItem[] = [
-    { id: 1, userName: 'myfor', email: 'mfory@qq.com', createDate: '2020-20-20', state: 1 }
+    //  { id: 1, userName: 'myfor', email: 'mfory@qq.com', createDate: '2020-20-20', state: 1 }
   ];
   columnsToDisplay = ['userName', 'email', 'createDate', 'action'];
 
