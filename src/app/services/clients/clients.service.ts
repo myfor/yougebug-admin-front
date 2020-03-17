@@ -5,11 +5,19 @@ import { Observable } from 'rxjs';
 import { catchError, debounceTime, retry } from 'rxjs/operators';
 
 //  客户列表单项
-export class ClientItem {
+export interface ClientItem {
   id: number;
   userName: string;
   email: string;
   createDate: string;
+  state: number;
+}
+
+//  客户详情
+export interface ClientDetail {
+  userName: string;
+  email: string;
+  avatar: string;
   state: number;
 }
 
@@ -45,13 +53,35 @@ export class ClientsService {
     );
   }
 
+  //  获取详情
+  getClientDetail(id: number): Observable<Result<ClientDetail>> {
+    const URL = `${ROUTER_PREFIX}/api/clients/${id}`;
+    return this.http.patch<Result>(URL, '')
+    .pipe(
+      retry(1),
+      catchError(this.base.handleError)
+    );
+  }
+
   //  启用用户
-  enabledClient(id: number) {
-    console.log(`enabled ${id}`);
+  enabledClient(id: number): Observable<Result> {
+    const URL = `${ROUTER_PREFIX}/api/clients/${id}/enabled`;
+    return this.http.patch<Result>(URL, '')
+    .pipe(
+      debounceTime(500),
+      retry(1),
+      catchError(this.base.handleError)
+    );
   }
 
   //  禁用用户
   disabledClient(id: number) {
-    console.log(`disabled ${id}`);
+    const URL = `${ROUTER_PREFIX}/api/clients/${id}/disabled`;
+    return this.http.patch<Result>(URL, '')
+    .pipe(
+      debounceTime(500),
+      retry(1),
+      catchError(this.base.handleError)
+    );
   }
 }

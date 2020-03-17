@@ -1,1 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
+
+.container {
+  max-width: 95%;
+  margin: auto;
+}
+
+.flex-column {
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.w-100 {
+  width: 100% !important;
+}
+
+.avatar {
+  padding: 4px;
+  border-radius: 5px;
+  border: 1px solid #cecece;
+}

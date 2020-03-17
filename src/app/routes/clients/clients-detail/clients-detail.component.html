@@ -1,1 +1,14 @@
-<p>clients-detail works!</p>
+<page-header></page-header>
+
+<div class="container flex-column">
+  <mat-form-field>
+    <input matInput placeholder="名称" readonly value="{{detail.userName}}">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="邮箱" readonly value="{{detail.email}}">
+  </mat-form-field>
+  <label>头像</label>
+  <img class="avatar" src="{{detail.avatar}}" alt="头像" height="128" width="128">
+  <br>
+  <mat-slide-toggle [checked]="detail.state === 0" [id]="id" (change)="enabledOrDisabled($event)">禁用</mat-slide-toggle>
+</div>

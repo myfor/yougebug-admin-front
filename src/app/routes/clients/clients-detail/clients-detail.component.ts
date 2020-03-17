@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSlideToggleChange } from '@angular/material';
+import { ClientsService, ClientDetail } from '../../../services/clients/clients.service';
+import { ActivatedRoute } from '@angular/router';
+import { CommonService } from '../../../services/common.service';
 
 @Component({
   selector: 'app-clients-detail',
@@ -7,9 +11,38 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ClientsDetailComponent implements OnInit {
 
-  constructor() { }
+  id = 0;
+  detail: ClientDetail = {
+    userName: 'userName',
+    email: 'email',
+    avatar: 'assets/images/avatar.png',
+    state: 0
+  };
+
+  constructor(
+    private client: ClientsService,
+    private route: ActivatedRoute,
+    private common: CommonService
+  ) { }
 
   ngOnInit() {
+    this.id = parseInt(this.route.snapshot.paramMap.get('id'), null);
+    this.client.getClientDetail(this.id)
+    .subscribe(r => {
+      if (r.isFault) {
+        this.common.snackOpen(r.message);
+        history.back();
+        return;
+      }
+      this.detail = r.data;
+    });
   }
 
+  enabledOrDisabled(value: MatSlideToggleChange) {
+    if (value.checked) {
+      this.client.enabledClient(parseInt(value.source.id, null));
+    } else {
+      this.client.disabledClient(parseInt(value.source.id, null));
+    }
+  }
 }

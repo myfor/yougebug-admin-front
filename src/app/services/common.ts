@@ -73,5 +73,5 @@ export class ServicesBase {
         console.error(`backend returned code ${error.status}`);
         console.error(`error: ${error.error}`);
         return of(result);
-      }
+    }
 }
