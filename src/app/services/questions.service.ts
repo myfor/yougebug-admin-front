@@ -9,6 +9,7 @@ export interface QuestionItem {
   id: number;
   title: string;
   description: string;
+  state: number;
   createDate: string;
 }
 

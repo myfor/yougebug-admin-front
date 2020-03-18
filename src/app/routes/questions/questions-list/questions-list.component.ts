@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { QuestionsService, QuestionItem } from '../../../services/questions.service';
-import { PageEvent } from '@angular/material';
+import { PageEvent, MatSlideToggleChange } from '@angular/material';
 import { CommonService } from 'app/services/common.service';
 
 @Component({
@@ -12,9 +12,11 @@ export class QuestionsListComponent implements OnInit {
 
   size = 0;
   totalSize = 0;
-  dataSource: QuestionItem[] = [];
+  dataSource: QuestionItem[] = [
+    { id: 0, title: 'title', description: 'description', state: 0, createDate: '2020[20[20' }
+  ];
 
-  columnsToDisplay = ['title', 'description', 'createDate'];
+  columnsToDisplay = ['title', 'description', 'createDate', 'action' ];
 
   constructor(
     private question: QuestionsService,
@@ -39,5 +41,9 @@ export class QuestionsListComponent implements OnInit {
       this.size = result.data.rows;
       this.totalSize = result.data.totalRows;
     });
+  }
+
+  enabledOrDisabled(value: MatSlideToggleChange) {
+
   }
 }
