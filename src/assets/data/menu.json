@@ -21,6 +21,17 @@
       }]
     },
     {
+      "state": "questions",
+      "name": "提问管理",
+      "type": "sub",
+      "icon": "live_help",
+      "children": [{
+        "state": "",
+        "name": "提问列表",
+        "type": "link"
+      }]
+    },
+    {
       "state": "sessions",
       "name": "Sessions",
       "type": "sub",

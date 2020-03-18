@@ -10,8 +10,8 @@ import { CommonService } from '../../../services/common.service';
 })
 export class ClientsListComponent implements OnInit {
 
-  size = 20;
-  totalSize = 100;
+  size = 0;
+  totalSize = 0;
 
   dataSource: ClientItem[] = [
     //  { id: 1, userName: 'myfor', email: 'mfory@qq.com', createDate: '2020-20-20', state: 1 }
@@ -28,7 +28,7 @@ export class ClientsListComponent implements OnInit {
   }
 
   pageChange(page: PageEvent) {
-    this.getClientsList(page.pageIndex);
+    this.getClientsList(page.pageIndex + 1);
   }
 
   private getClientsList(index: number) {
@@ -38,6 +38,8 @@ export class ClientsListComponent implements OnInit {
         return;
       }
       this.dataSource = result.data.list;
+      this.size = result.data.rows;
+      this.totalSize = result.data.totalRows;
     });
   }
 

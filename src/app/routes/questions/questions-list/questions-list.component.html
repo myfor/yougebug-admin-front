@@ -1,1 +1,5 @@
-<p>questions-list works!</p>
+<page-header></page-header>
+<table mat-table [dateSource]="dataSource">
+
+</table>
+<mat-paginator showFirstLastButtons [pageSize]="size" [length]="totalSize" (page)="pageChange($event)"></mat-paginator>
