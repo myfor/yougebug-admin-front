@@ -44,6 +44,10 @@ export class QuestionsListComponent implements OnInit {
   }
 
   enabledOrDisabled(value: MatSlideToggleChange) {
-
+    if (value.checked) {
+      this.question.enabledQuestion(parseInt(value.source.id, null));
+    } else {
+      this.question.disabledQuestion(parseInt(value.source.id, null));
+    }
   }
 }
