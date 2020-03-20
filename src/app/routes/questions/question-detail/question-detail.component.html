@@ -4,6 +4,17 @@
     <div class="back">
       <app-back></app-back>
     </div>
-    
+    <h2>
+      提问详情
+    </h2>
+    <mat-form-field>
+      <input matInput type="text" placeholder="标题" readonly value="{{detail.title}}">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>问题描述</mat-label>
+      <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="2">
+        {{detail.description}}
+      </textarea>
+    </mat-form-field>
   </div>
 </div>
