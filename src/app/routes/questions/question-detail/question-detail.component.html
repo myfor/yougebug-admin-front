@@ -4,17 +4,38 @@
     <div class="back">
       <app-back></app-back>
     </div>
-    <h2>
-      提问详情
-    </h2>
-    <mat-form-field>
-      <input matInput type="text" placeholder="标题" readonly value="{{detail.title}}">
-    </mat-form-field>
+    <div class="d-title">
+      <div class="d-title-detail">
+        <h2>
+          提问详情
+        </h2>
+        <div class="mat-h2">{{detail.title}}</div>
+        <p>
+          赞同数：{{detail.votes}} &nbsp;&nbsp;&nbsp;&nbsp;
+          浏览数：{{detail.views}} &nbsp;&nbsp;&nbsp;&nbsp;
+          提问日期：{{detail.createDate}} &nbsp;&nbsp;&nbsp;&nbsp;
+          {{detail.state.value}}
+        </p>
+        <p>
+          <span class="spn-tag" *ngFor="let tag of detail.tags">
+            {{tag}}
+          </span>
+        </p>
+      </div>
+      <div class="d-title-user">
+        提问人：
+        <img src="{{detail.askerThumbnail}}" alt="logo" height="27" width="27">
+        {{detail.askerName}}
+      </div>
+    </div>
     <mat-form-field>
       <mat-label>问题描述</mat-label>
       <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="2">
         {{detail.description}}
       </textarea>
     </mat-form-field>
+    <div *ngFor="let answer of detail.answers">
+      <app-answers-item></app-answers-item>
+    </div>
   </div>
 </div>

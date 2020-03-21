@@ -12,7 +12,7 @@ export class QuestionDetailComponent implements OnInit {
 
   id: number;
   detail: QuestionDetail = {
-    title: 'title',
+    title: 'title哈哈',
     description: `
     descpiptionaaaaaa
     descpiptionaaaaaa
@@ -24,15 +24,28 @@ export class QuestionDetailComponent implements OnInit {
     descpiptionaaaaaa
     descpiptionaaaaaa
     `,
-    state: 1,
+    state: {
+      key: 1,
+      value: '启用'
+    },
     createDate: '2020-02-02',
-    tags: ['a', 'b'],
+    tags: ['aaaaa', 'bbbbbb'],
     votes: 120,
     views: 100,
     askerId: 1,
     askerName: 'username',
     askerThumbnail: 'assets/images/avatar.png',
-    answers: []
+    answers: [
+      {
+        id: 1,
+        votes: 90,
+        content: 'dot not know',
+        createDate: '2020[09[09',
+        userId: 1,
+        userName: 'answer user',
+        avatar: 'assets/images/avatar.png'
+      }
+    ]
   };
 
   constructor(

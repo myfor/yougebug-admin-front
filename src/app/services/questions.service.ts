@@ -3,6 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { ServicesBase, Result, Paginator, ROUTER_PREFIX } from './common';
 import { Observable } from 'rxjs';
 import { debounceTime, retry, catchError } from 'rxjs/operators';
+import { KeyValue } from '@angular/common';
 
 export interface QuestionItem {
   id: number;
@@ -15,7 +16,7 @@ export interface QuestionItem {
 export interface QuestionDetail {
   title: string;
   description: string;
-  state: number;
+  state: KeyValue<number, string>;
   createDate: string;
   tags: string[];
   votes: number;
