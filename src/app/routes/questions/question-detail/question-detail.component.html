@@ -3,6 +3,11 @@
   <div class="container flex-column">
     <div class="back">
       <app-back></app-back>
+      &nbsp;&nbsp;
+      <div [ngSwitch]="detail.state.key">
+        <button mat-stroked-button color="primary" *ngSwitchCase="0" (click)="enabled()">启用</button>
+        <button mat-stroked-button color="warn" *ngSwitchCase="1" (click)="disabled()">禁用</button>
+      </div>
     </div>
     <div class="d-title">
       <div class="d-title-detail">
@@ -34,8 +39,9 @@
         {{detail.description}}
       </textarea>
     </mat-form-field>
-    <div *ngFor="let answer of detail.answers">
-      <app-answers-item></app-answers-item>
+    <div *ngFor="let answer of detail.answers.list">
+      <app-answers-item [answer]="answer"></app-answers-item>
     </div>
+    <mat-paginator showFirstLastButtons [pageSize]="detail.answers.rows" [length]="detail.answers.totalRows" (page)="pageChange($event)"></mat-paginator>
   </div>
 </div>

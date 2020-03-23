@@ -4,6 +4,7 @@ import { ServicesBase, Result, Paginator, ROUTER_PREFIX } from './common';
 import { Observable } from 'rxjs';
 import { debounceTime, retry, catchError } from 'rxjs/operators';
 import { KeyValue } from '@angular/common';
+import { AnswerItem } from './answers.service';
 
 export interface QuestionItem {
   id: number;
@@ -24,17 +25,7 @@ export interface QuestionDetail {
   askerId: number;
   askerName: string;
   askerThumbnail: string;
-  answers: AnswerItem[];
-}
-
-export interface AnswerItem {
-  id: number;
-  votes: number;
-  content: string;
-  createDate: string;
-  userId: number;
-  userName: string;
-  avatar: string;
+  answers: Paginator<AnswerItem>;
 }
 
 @Injectable({
@@ -48,16 +39,17 @@ export class QuestionsService {
   ) { }
 
   getQuestions(index: number, search = '', size = 20): Observable<Result<Paginator>> {
-    const p = new HttpParams();
+    let p = new HttpParams();
     if (search) {
-      p.append('search', search);
+      p = p.append('search', search);
     }
     if (index <= 0) {
       index = 1;
     }
-    p.append('index', index.toString())
-      .append('size', size.toString());
+    p = p.append('index', index.toString())
+        .append('size', size.toString());
     const URL = `${ROUTER_PREFIX}/api/questions?${p.toString()}`;
+    console.log(URL);
     return this.http.get<Result<Paginator<QuestionItem>>>(URL)
     .pipe(
       debounceTime(500),

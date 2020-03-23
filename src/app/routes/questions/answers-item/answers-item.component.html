@@ -1,1 +1,18 @@
-<p>answers-item works!</p>
+<div class="d-answer">
+  <div class="d-info">
+    <span>赞同数：{{answer.votes}}</span>
+    <span class="m-l-3">回答时间：{{answer.createDate}}</span>
+    <span class="m-l-3">回答人：
+      <img src="{{answer.avatar}}" alt="logo" width="27" height="27">
+      {{answer.userName}}
+    </span>
+    <span class="m-l-3">当前状态：{{answer.state.value}}</span>
+    <p>
+      {{answer.content}}
+    </p>
+  </div>
+  <div [ngSwitch]="answer.state.key">
+    <button mat-raised-button color="primary" *ngSwitchCase="0" (click)="enabled()">启用</button>
+    <button mat-raised-button color="warn" *ngSwitchCase="1" (click)="disabled()">禁用</button>
+  </div>
+</div>

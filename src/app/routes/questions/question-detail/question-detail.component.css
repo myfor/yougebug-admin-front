@@ -1,5 +1,6 @@
 .back {
-  text-align: right;
+  display: flex;
+  flex-direction: row-reverse;
 }
 
 .d-title {
@@ -12,8 +13,6 @@
 }
 
 .d-title>.d-title-user {
-  /* display: flex;
-  flex-direction: column; */
   margin: 1rem 1rem 0 0;
 }
 

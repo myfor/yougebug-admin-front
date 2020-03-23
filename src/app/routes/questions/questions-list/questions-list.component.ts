@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { QuestionsService, QuestionItem } from '../../../services/questions.service';
 import { PageEvent, MatSlideToggleChange } from '@angular/material';
 import { CommonService } from 'app/services/common.service';
+import { ConsoleService } from '@ng-select/ng-select/lib/console.service';
 
 @Component({
   selector: 'app-questions-list',
@@ -10,6 +11,8 @@ import { CommonService } from 'app/services/common.service';
 })
 export class QuestionsListComponent implements OnInit {
 
+  index = 1;
+  searchTitle = '';
   size = 0;
   totalSize = 0;
   dataSource: QuestionItem[] = [
@@ -24,15 +27,16 @@ export class QuestionsListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.getQuestionsList(1);
+    this.getQuestionsList();
   }
 
   pageChange(page: PageEvent) {
-    this.getQuestionsList(page.pageIndex + 1);
+    this.index = page.pageIndex + 1;
+    this.getQuestionsList();
   }
 
-  private getQuestionsList(index: number) {
-    this.question.getQuestions(index).subscribe(result => {
+  private getQuestionsList() {
+    this.question.getQuestions(this.index, this.searchTitle).subscribe(result => {
       if (result.isFault) {
         this.common.snackOpen(result.message, 2000);
         return;
@@ -49,5 +53,14 @@ export class QuestionsListComponent implements OnInit {
     } else {
       this.question.disabledQuestion(parseInt(value.source.id, null));
     }
+  }
+
+  search(title: string) {
+    title = title.trim();
+    if (!title) {
+      return;
+    }
+    this.searchTitle = title;
+    this.getQuestionsList();
   }
 }

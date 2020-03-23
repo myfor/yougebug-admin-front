@@ -1,4 +1,11 @@
 <page-header></page-header>
+<div>
+  <mat-form-field>
+    <input matInput type="text" #txt_title placeholder="搜索标题">
+  </mat-form-field>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <button mat-raised-button color="primary" (click)="search(txt_title.value)">搜索</button>
+</div>
 <table mat-table [dataSource]="dataSource">
   <ng-container matColumnDef="title">
     <th mat-header-cell *matHeaderCellDef>标题</th>
