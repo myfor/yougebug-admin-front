@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { CommonService } from '../../../services/common.service';
 import { UsersService } from '../../../services/users/users.service';
+import { Global } from '../../../global';
 
 @Component({
   selector: 'app-user',
@@ -13,7 +13,7 @@ import { UsersService } from '../../../services/users/users.service';
       [matMenuTriggerFor]="menu"
     >
       <img class="matero-avatar" src="assets/images/avatar.png" width="32" alt="avatar" />
-      <span class="matero-username" fxHide.lt-sm>Zongbin</span>
+      <span class="matero-username" fxHide.lt-sm>{{userName}}</span>
     </a>
 
     <mat-menu #menu="matMenu">
@@ -33,18 +33,17 @@ import { UsersService } from '../../../services/users/users.service';
   `,
 })
 export class UserComponent {
+
+  userName = Global.userName;
+
   constructor(
     private router: Router,
-    private common: CommonService,
     private user: UsersService
   ) {}
 
   logout() {
-    this.user.logout().subscribe((result) => {
-      if (result.isFault) {
-        this.common.snackOpen('登出失败');
-        return;
-      }
+    this.user.logout().subscribe(() => {
+      Global.loggout();
       this.router.navigateByUrl('/auth/login');
     });
   }

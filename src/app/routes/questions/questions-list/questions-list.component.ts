@@ -56,9 +56,7 @@ export class QuestionsListComponent implements OnInit {
 
   search(title: string) {
     title = title.trim();
-    if (!title) {
-      return;
-    }
+
     this.searchTitle = title;
     this.getQuestionsList();
   }

@@ -48,17 +48,28 @@ export class ClientsListComponent implements OnInit {
 
   enabledOrDisabled(value: MatSlideToggleChange) {
     if (value.checked) {
-      this.client.enabledClient(parseInt(value.source.id, null));
+      this.client.enabledClient(parseInt(value.source.id, null))
+      .subscribe(r => {
+        if (r.isFault) {
+          this.common.snackOpen(r.message, 2000);
+          value.checked = true;
+          return;
+        }
+      });
     } else {
-      this.client.disabledClient(parseInt(value.source.id, null));
+      this.client.disabledClient(parseInt(value.source.id, null))
+      .subscribe(r => {
+        if (r.isFault) {
+          this.common.snackOpen(r.message, 2000);
+          value.checked = false;
+          return;
+        }
+      });
     }
   }
 
   search(value: string) {
     value = value.trim();
-    if (!value) {
-      return;
-    }
     this.searchTitle = value;
     this.getClientsList();
   }

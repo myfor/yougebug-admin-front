@@ -16,7 +16,10 @@ export class ClientsDetailComponent implements OnInit {
     userName: 'userName',
     email: 'email',
     avatar: 'assets/images/avatar.png',
-    state: 0,
+    state: {
+      key: 1,
+      value: '启用'
+    },
     createDate: '2020-20-20'
   };
 
@@ -41,9 +44,23 @@ export class ClientsDetailComponent implements OnInit {
 
   enabledOrDisabled(value: MatSlideToggleChange) {
     if (value.checked) {
-      this.client.enabledClient(parseInt(value.source.id, null));
+      this.client.enabledClient(parseInt(value.source.id, null))
+      .subscribe(r => {
+        if (r.isFault) {
+          this.common.snackOpen(r.message, 2000);
+          value.checked = true;
+          return;
+        }
+      });
     } else {
-      this.client.disabledClient(parseInt(value.source.id, null));
+      this.client.disabledClient(parseInt(value.source.id, null))
+      .subscribe(r => {
+        if (r.isFault) {
+          this.common.snackOpen(r.message, 2000);
+          value.checked = false;
+          return;
+        }
+      });
     }
   }
 }

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonService } from '../../../services/common.service';
 import { UsersService } from '../../../services/users/users.service';
+import { Global } from '../../../global';
 
 @Component({
   selector: 'app-user-panel',
@@ -13,8 +14,8 @@ import { UsersService } from '../../../services/users/users.service';
         alt="avatar"
         width="64"
       />
-      <h4 class="matero-user-panel-name">Zongbin</h4>
-      <h5 class="matero-user-panel-email">nzb329@163.com</h5>
+      <h4 class="matero-user-panel-name">{{userName}}</h4>
+      <h5 class="matero-user-panel-email">{{email}}</h5>
       <div class="matero-user-panel-icons">
         <a routerLink="/profile/overview" mat-icon-button>
           <mat-icon>account_circle</mat-icon>
@@ -30,18 +31,18 @@ import { UsersService } from '../../../services/users/users.service';
   `,
 })
 export class UserPanelComponent {
+
+  userName = Global.userName;
+  email = Global.email;
+
   constructor(
     private router: Router,
-    private common: CommonService,
     private user: UsersService
   ) {}
 
   logout() {
-    this.user.logout().subscribe((result) => {
-      if (result.isFault) {
-        this.common.snackOpen('登出失败');
-        return;
-      }
+    this.user.logout().subscribe(() => {
+      Global.loggout();
       this.router.navigateByUrl('/auth/login');
     });
   }

@@ -49,7 +49,7 @@ export class QuestionsService {
     p = p.append('index', index.toString())
         .append('size', size.toString());
     const URL = `${ROUTER_PREFIX}/api/questions?${p.toString()}`;
-    console.log(URL);
+    //  console.log(URL);
     return this.http.get<Result<Paginator<QuestionItem>>>(URL)
     .pipe(
       debounceTime(500),

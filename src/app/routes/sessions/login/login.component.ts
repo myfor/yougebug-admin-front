@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
     };
     this.user.login(loginInfo).subscribe((result) => {
       if (result.isFault) {
-        this.common.snackOpen('登录失败，请重试');
+        this.common.snackOpen(result.message);
         return;
       }
       Global.setGlobalUserInfo(result.data.userName, result.data.email);

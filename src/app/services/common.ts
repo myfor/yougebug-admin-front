@@ -2,7 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { of } from 'rxjs';
 import { Injectable } from '@angular/core';
 
-export const ROUTER_PREFIX = 'admin';
+export const ROUTER_PREFIX = '/admin';
 
 /**
  * 服务器响应模型

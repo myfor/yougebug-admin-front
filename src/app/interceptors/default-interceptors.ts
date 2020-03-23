@@ -5,14 +5,15 @@ import {
 import { Observable, throwError, of } from 'rxjs';
 import { catchError, mergeMap } from 'rxjs/operators';
 import { FAULT } from '../services/common';
-
+import { Router } from '@angular/router';
 import { CommonService } from '../services/common.service';
 
 @Injectable()
 export class DefaultInterceptor implements HttpInterceptor {
 
     constructor(
-        private common: CommonService
+        private common: CommonService,
+        private router: Router
     ) {}
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -49,10 +50,9 @@ export class DefaultInterceptor implements HttpInterceptor {
                     return of(resp);
                 }),
                 catchError((err: HttpErrorResponse) => {
-                    // console.log('error');
                     this.common.snackOpen(err.message);
                     switch (err.status) {
-                        // case 401: break;
+                        case 401: this.router.navigateByUrl('/auth/login'); break;
                         default: return throwError(err);
                     }
                 })
