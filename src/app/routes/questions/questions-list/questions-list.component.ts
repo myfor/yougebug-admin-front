@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { QuestionsService, QuestionItem } from '../../../services/questions.service';
 import { PageEvent, MatSlideToggleChange } from '@angular/material';
 import { CommonService } from 'app/services/common.service';
-import { ConsoleService } from '@ng-select/ng-select/lib/console.service';
 
 @Component({
   selector: 'app-questions-list',
@@ -16,7 +15,7 @@ export class QuestionsListComponent implements OnInit {
   size = 0;
   totalSize = 0;
   dataSource: QuestionItem[] = [
-    { id: 0, title: 'title', description: 'description', state: 0, createDate: '2020[20[20' }
+    //  { id: 0, title: 'title', description: 'description', state: 0, createDate: '2020[20[20' }
   ];
 
   columnsToDisplay = ['title', 'description', 'createDate', 'action' ];

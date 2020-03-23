@@ -33,7 +33,7 @@ export class ClientsService {
   ) { }
 
   //  获取客户列表
-  getClients(index: number, size = 20, search = ''): Observable<Result<Paginator<ClientItem>>> {
+  getClients(index: number, search = '', size = 20): Observable<Result<Paginator<ClientItem>>> {
     const p = new HttpParams();
 
     if (search) {

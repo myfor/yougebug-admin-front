@@ -14,65 +14,66 @@ export class QuestionDetailComponent implements OnInit {
 
   id: number;
 
-  detail: QuestionDetail = {
-    title: 'title哈哈',
-    description: `
-    descpiptionaaaaaa
-    descpiptionaaaaaa
-    descpiptionaaaaaa
-    descpiptionaaaaaa
-    descpiptionaaaaaa
-    descpiptionaaaaaa
-    descpiptionaaaaaa
-    descpiptionaaaaaa
-    descpiptionaaaaaa
-    `,
-    state: {
-      key: 1,
-      value: '启用'
-    },
-    createDate: '2020-02-02',
-    tags: ['aaaaa', 'bbbbbb'],
-    votes: 120,
-    views: 100,
-    askerId: 1,
-    askerName: 'username',
-    askerThumbnail: 'assets/images/avatar.png',
-    answers: {
-      index: 1,
-      rows: 10,
-      totalRows: 100,
-      totalPages: 10,
-      list: [
-        {
-          id: 1,
-          votes: 90,
-          content: 'dot not know',
-          createDate: '2020[09[09',
-          userId: 1,
-          userName: 'answer user',
-          avatar: 'assets/images/avatar.png',
-          state: {
-            key: 1,
-            value: '启用'
-          }
-        },
-        {
-          id: 2,
-          votes: 90,
-          content: 'dot not know',
-          createDate: '2020[09[09',
-          userId: 1,
-          userName: 'answer user',
-          avatar: 'assets/images/avatar.png',
-          state: {
-            key: 0,
-            value: '禁用'
-          }
-        }
-      ]
-    }
-  };
+  detail: QuestionDetail;
+  //  = {
+  //   title: 'title哈哈',
+  //   description: `
+  //   descpiptionaaaaaa
+  //   descpiptionaaaaaa
+  //   descpiptionaaaaaa
+  //   descpiptionaaaaaa
+  //   descpiptionaaaaaa
+  //   descpiptionaaaaaa
+  //   descpiptionaaaaaa
+  //   descpiptionaaaaaa
+  //   descpiptionaaaaaa
+  //   `,
+  //   state: {
+  //     key: 1,
+  //     value: '启用'
+  //   },
+  //   createDate: '2020-02-02',
+  //   tags: ['aaaaa', 'bbbbbb'],
+  //   votes: 120,
+  //   views: 100,
+  //   askerId: 1,
+  //   askerName: 'username',
+  //   askerThumbnail: 'assets/images/avatar.png',
+  //   answers: {
+  //     index: 1,
+  //     rows: 10,
+  //     totalRows: 100,
+  //     totalPages: 10,
+  //     list: [
+  //       {
+  //         id: 1,
+  //         votes: 90,
+  //         content: 'dot not know',
+  //         createDate: '2020[09[09',
+  //         userId: 1,
+  //         userName: 'answer user',
+  //         avatar: 'assets/images/avatar.png',
+  //         state: {
+  //           key: 1,
+  //           value: '启用'
+  //         }
+  //       },
+  //       {
+  //         id: 2,
+  //         votes: 90,
+  //         content: 'dot not know',
+  //         createDate: '2020[09[09',
+  //         userId: 1,
+  //         userName: 'answer user',
+  //         avatar: 'assets/images/avatar.png',
+  //         state: {
+  //           key: 0,
+  //           value: '禁用'
+  //         }
+  //       }
+  //     ]
+  //   }
+  // };
 
   constructor(
     private question: QuestionsService,

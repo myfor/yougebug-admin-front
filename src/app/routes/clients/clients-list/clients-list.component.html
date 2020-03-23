@@ -1,4 +1,10 @@
 <page-header></page-header>
+<div>
+  <mat-form-field>
+    <input matInput placeholder="搜索名称" #txt_title>
+  </mat-form-field>
+  <button class="m-l-3" mat-raised-button color="primary" (click)="search(txt_title.value)">搜索</button>
+</div>
 <table mat-table [dataSource]="dataSource" aria-label="用户列表">
   <ng-container matColumnDef="userName">
     <th mat-header-cell *matHeaderCellDef>用户名</th>
@@ -15,7 +21,8 @@
   <ng-container matColumnDef="action">
     <th mat-header-cell *matHeaderCellDef>操作</th>
     <td mat-cell *matCellDef="let element">
-      <mat-slide-toggle [checked]="element.state === 1" [id]="element.id" (change)="enabledOrDisabled($event)">启用</mat-slide-toggle>
+      <mat-slide-toggle [checked]="element.state === 1" [id]="element.id" (change)="enabledOrDisabled($event)">启用
+      </mat-slide-toggle>
       &nbsp;
       <a [routerLink]="['/clients', element.id]" mat-stroked-button color="primary">详情</a>
     </td>

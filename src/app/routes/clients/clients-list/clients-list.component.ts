@@ -10,6 +10,8 @@ import { CommonService } from '../../../services/common.service';
 })
 export class ClientsListComponent implements OnInit {
 
+  index = 1;
+  searchTitle = '';
   size = 0;
   totalSize = 0;
 
@@ -24,15 +26,16 @@ export class ClientsListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.getClientsList(1);
+    this.getClientsList();
   }
 
   pageChange(page: PageEvent) {
-    this.getClientsList(page.pageIndex + 1);
+    this.index = page.pageIndex + 1;
+    this.getClientsList();
   }
 
-  private getClientsList(index: number) {
-    this.client.getClients(index).subscribe(result => {
+  private getClientsList() {
+    this.client.getClients(this.index, this.searchTitle).subscribe(result => {
       if (result.isFault) {
         this.common.snackOpen(result.message, 2000);
         return;
@@ -49,5 +52,14 @@ export class ClientsListComponent implements OnInit {
     } else {
       this.client.disabledClient(parseInt(value.source.id, null));
     }
+  }
+
+  search(value: string) {
+    value = value.trim();
+    if (!value) {
+      return;
+    }
+    this.searchTitle = value;
+    this.getClientsList();
   }
 }
