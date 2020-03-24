@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { QuestionsService, QuestionItem } from '../../../services/questions.service';
 import { PageEvent, MatSlideToggleChange } from '@angular/material';
 import { CommonService } from 'app/services/common.service';
+import { interval } from 'rxjs';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-questions-list',
@@ -47,6 +49,10 @@ export class QuestionsListComponent implements OnInit {
   }
 
   enabledOrDisabled(value: MatSlideToggleChange) {
+    value.source.disabled = true;
+    const disabledInterval$ = interval(1000).pipe(take(1));
+    disabledInterval$.subscribe(() => value.source.disabled = false);
+
     if (value.checked) {
       this.question.enabledQuestion(parseInt(value.source.id, null))
       .subscribe(r => {
