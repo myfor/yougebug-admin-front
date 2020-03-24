@@ -29,8 +29,8 @@
       </div>
       <div class="d-title-user">
         提问人：
-        <img src="{{detail.askerThumbnail}}" alt="logo" height="27" width="27">
-        {{detail.askerName}}
+        <img src="{{detail.user.avatar}}" alt="logo" height="27" width="27">
+        {{detail.user.account}}
       </div>
     </div>
     <mat-form-field>
@@ -39,9 +39,10 @@
         {{detail.description}}
       </textarea>
     </mat-form-field>
-    <div *ngFor="let answer of detail.answers.list">
-      <app-answers-item [answer]="answer"></app-answers-item>
-    </div>
-    <mat-paginator showFirstLastButtons [pageSize]="detail.answers.rows" [length]="detail.answers.totalRows" (page)="pageChange($event)"></mat-paginator>
+      <div *ngFor="let answer of detail.page.list">
+        <app-answers-item [answer]="answer"></app-answers-item>
+      </div>
+    <mat-paginator showFirstLastButtons [pageSize]="detail.page.size" [length]="detail.page.totalRows"
+      (page)="pageChange($event)"></mat-paginator>
   </div>
 </div>

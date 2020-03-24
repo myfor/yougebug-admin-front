@@ -11,6 +11,8 @@ import { Global } from '../../../global';
   templateUrl: './login.component.html',
 })
 export class LoginComponent implements OnInit {
+
+  btnDisabled = false;
   reactiveForm: FormGroup;
 
   constructor(
@@ -36,9 +38,11 @@ export class LoginComponent implements OnInit {
       account: this.reactiveForm.get('username').value,
       password: this.reactiveForm.get('password').value
     };
+    this.btnDisabled = true;
     this.user.login(loginInfo).subscribe((result) => {
       if (result.isFault) {
         this.common.snackOpen(result.message);
+        this.btnDisabled = false;
         return;
       }
       Global.setGlobalUserInfo(result.data.userName, result.data.email);

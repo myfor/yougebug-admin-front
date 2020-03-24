@@ -7,7 +7,7 @@ export class Global {
   设置用户的全局信息
   */
   public static setGlobalUserInfo(name: string, email: string) {
-    console.log(`${name} -- ${email}`);
+    //  console.log(`${name} -- ${email}`);
     Global.userName = name;
     Global.email = email;
   }

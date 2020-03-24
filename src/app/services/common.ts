@@ -26,7 +26,7 @@ export const FAULT: undefined = undefined;
  */
 export interface Paginator<T = any> {
     index: number;
-    rows: number;
+    size: number;
     totalPages: number;
     totalRows: number;
     list: T[];

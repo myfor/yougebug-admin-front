@@ -41,7 +41,7 @@ export class ClientsListComponent implements OnInit {
         return;
       }
       this.dataSource = result.data.list;
-      this.size = result.data.rows;
+      this.size = result.data.size;
       this.totalSize = result.data.totalRows;
     });
   }

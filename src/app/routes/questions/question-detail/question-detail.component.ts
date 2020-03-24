@@ -14,66 +14,31 @@ export class QuestionDetailComponent implements OnInit {
 
   id: number;
 
-  detail: QuestionDetail;
-  //  = {
-  //   title: 'title哈哈',
-  //   description: `
-  //   descpiptionaaaaaa
-  //   descpiptionaaaaaa
-  //   descpiptionaaaaaa
-  //   descpiptionaaaaaa
-  //   descpiptionaaaaaa
-  //   descpiptionaaaaaa
-  //   descpiptionaaaaaa
-  //   descpiptionaaaaaa
-  //   descpiptionaaaaaa
-  //   `,
-  //   state: {
-  //     key: 1,
-  //     value: '启用'
-  //   },
-  //   createDate: '2020-02-02',
-  //   tags: ['aaaaa', 'bbbbbb'],
-  //   votes: 120,
-  //   views: 100,
-  //   askerId: 1,
-  //   askerName: 'username',
-  //   askerThumbnail: 'assets/images/avatar.png',
-  //   answers: {
-  //     index: 1,
-  //     rows: 10,
-  //     totalRows: 100,
-  //     totalPages: 10,
-  //     list: [
-  //       {
-  //         id: 1,
-  //         votes: 90,
-  //         content: 'dot not know',
-  //         createDate: '2020[09[09',
-  //         userId: 1,
-  //         userName: 'answer user',
-  //         avatar: 'assets/images/avatar.png',
-  //         state: {
-  //           key: 1,
-  //           value: '启用'
-  //         }
-  //       },
-  //       {
-  //         id: 2,
-  //         votes: 90,
-  //         content: 'dot not know',
-  //         createDate: '2020[09[09',
-  //         userId: 1,
-  //         userName: 'answer user',
-  //         avatar: 'assets/images/avatar.png',
-  //         state: {
-  //           key: 0,
-  //           value: '禁用'
-  //         }
-  //       }
-  //     ]
-  //   }
-  // };
+  detail: QuestionDetail
+  = {
+    title: '',
+    description: ``,
+    state: {
+      key: 0,
+      value: ''
+    },
+    createDate: '0001-01-01',
+    tags: [],
+    votes: 0,
+    views: 0,
+    user: {
+      id: 0,
+      account: '',
+      avatar: 'assets/images/avatar.png'
+    },
+    page: {
+      index: 1,
+      size: 0,
+      totalRows: 0,
+      totalPages: 0,
+      list: []
+    }
+  };
 
   constructor(
     private question: QuestionsService,
@@ -130,14 +95,14 @@ export class QuestionDetailComponent implements OnInit {
   }
 
   pageChange(pager: PageEvent) {
-    this.detail.answers.index = pager.pageIndex + 1;
-    this.answerService.getAnswers(this.id, this.detail.answers.index, 20)
+    this.detail.page.index = pager.pageIndex + 1;
+    this.answerService.getAnswers(this.id, this.detail.page.index, 10)
     .subscribe(r => {
       if (r.isFault) {
         this.common.snackOpen(r.message, 3000);
         return;
       } else {
-        this.detail.answers = r.data;
+        this.detail.page = r.data;
       }
     });
   }

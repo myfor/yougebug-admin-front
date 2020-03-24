@@ -41,22 +41,35 @@ export class QuestionsListComponent implements OnInit {
         return;
       }
       this.dataSource = result.data.list;
-      this.size = result.data.rows;
+      this.size = result.data.size;
       this.totalSize = result.data.totalRows;
     });
   }
 
   enabledOrDisabled(value: MatSlideToggleChange) {
     if (value.checked) {
-      this.question.enabledQuestion(parseInt(value.source.id, null));
+      this.question.enabledQuestion(parseInt(value.source.id, null))
+      .subscribe(r => {
+        if (r.isFault) {
+          this.common.snackOpen(r.message, 3000);
+          value.checked = false;
+          return;
+        }
+      });
     } else {
-      this.question.disabledQuestion(parseInt(value.source.id, null));
+      this.question.disabledQuestion(parseInt(value.source.id, null))
+      .subscribe(r => {
+        if (r.isFault) {
+          this.common.snackOpen(r.message, 3000);
+          value.checked = true;
+          return;
+        }
+      });
     }
   }
 
   search(title: string) {
     title = title.trim();
-
     this.searchTitle = title;
     this.getQuestionsList();
   }

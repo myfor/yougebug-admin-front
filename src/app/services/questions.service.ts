@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { ServicesBase, Result, Paginator, ROUTER_PREFIX } from './common';
 import { Observable } from 'rxjs';
 import { debounceTime, retry, catchError } from 'rxjs/operators';
@@ -22,10 +22,14 @@ export interface QuestionDetail {
   tags: string[];
   votes: number;
   views: number;
-  askerId: number;
-  askerName: string;
-  askerThumbnail: string;
-  answers: Paginator<AnswerItem>;
+  user: UserInfo;
+  page: Paginator<AnswerItem>;
+}
+
+export interface UserInfo {
+  id: number;
+  account: string;
+  avatar: string;
 }
 
 @Injectable({
@@ -52,7 +56,7 @@ export class QuestionsService {
     //  console.log(URL);
     return this.http.get<Result<Paginator<QuestionItem>>>(URL)
     .pipe(
-      debounceTime(500),
+      debounceTime(1000),
       retry(1),
       catchError(this.base.handleError)
     );
@@ -80,7 +84,7 @@ export class QuestionsService {
 
   //  禁用提问
   disabledQuestion(id: number) {
-    const URL = `${ROUTER_PREFIX}/api/questions/${id}/disabled`;
+    const URL = `${ROUTER_PREFIX}/api/questions/${id}/back?descpiption=`;
     return this.http.patch<Result>(URL, '')
     .pipe(
       debounceTime(500),
