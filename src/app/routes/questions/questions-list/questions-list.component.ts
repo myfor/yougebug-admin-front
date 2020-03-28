@@ -73,8 +73,8 @@ export class QuestionsListComponent implements OnInit {
           value.checked = false;
           return;
         }
-        currentItem.state.key = 1;
-        currentItem.state.value = '启用';
+        currentItem.state.key = this.common.enabledState.key;
+        currentItem.state.value = this.common.enabledState.value;
       });
     } else {
       this.question.disabledQuestion(currentId)
@@ -84,8 +84,8 @@ export class QuestionsListComponent implements OnInit {
           value.checked = true;
           return;
         }
-        currentItem.state.key = 0;
-        currentItem.state.value = '禁用';
+        currentItem.state.key = this.common.disabledState.key;
+        currentItem.state.value = this.common.disabledState.value;
       });
     }
   }
@@ -105,8 +105,8 @@ export class QuestionsListComponent implements OnInit {
       }
       this.dataSource.map((v, i) => {
         if (v.id === id) {
-          v.state.key = this.REMOVE;
-          v.state.value = this.REMOVE_DESCRIPTION;
+          v.state.key = this.common.removeState.key;
+          v.state.value = this.common.removeState.value;
           return;
       }
       });

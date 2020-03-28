@@ -38,7 +38,7 @@
       &nbsp;
       <a [routerLink]="['/questions', element.id]" mat-stroked-button color="primary">详情</a>
       &nbsp;
-      <button *ngIf="element.state.key !== REMOVE" mat-raised-button color="warn" (click)="detele(element.id)">删除</button>
+      <button *ngIf="element.state.key !== 2" mat-raised-button color="warn" (click)="detele(element.id)">删除</button>
     </td>
   </ng-container>
 
