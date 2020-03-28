@@ -7,6 +7,7 @@ import { catchError, mergeMap } from 'rxjs/operators';
 import { FAULT } from '../services/common';
 import { Router } from '@angular/router';
 import { CommonService } from '../services/common.service';
+import { Global } from '../global';
 
 @Injectable()
 export class DefaultInterceptor implements HttpInterceptor {
@@ -40,6 +41,7 @@ export class DefaultInterceptor implements HttpInterceptor {
                                 return of(resp);
                             }
                             case 401: {
+                                Global.loginggOut();
                                 resp.body.message = '';
                                 resp.body.isFault = true;
                                 return of(resp);
@@ -52,7 +54,10 @@ export class DefaultInterceptor implements HttpInterceptor {
                 catchError((err: HttpErrorResponse) => {
                     this.common.snackOpen(err.message);
                     switch (err.status) {
-                        case 401: this.router.navigateByUrl('/auth/login'); break;
+                        case 401:  {
+                            Global.loginggOut();
+                            this.router.navigateByUrl('/auth/login');
+                        }          break;
                         default: return throwError(err);
                     }
                 })

@@ -43,7 +43,7 @@ export class UserComponent {
 
   logout() {
     this.user.logout().subscribe(() => {
-      Global.loggout();
+      Global.loginggOut();
       this.router.navigateByUrl('/auth/login');
     });
   }
