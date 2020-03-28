@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, from } from 'rxjs';
+import { Observable, pipe } from 'rxjs';
 import { ServicesBase, Result, ROUTER_PREFIX } from '../common';
-import { debounceTime, catchError } from 'rxjs/operators';
+import { debounceTime, catchError, retry } from 'rxjs/operators';
 
 import sha256 from 'crypto-js/sha256';
 
@@ -46,6 +46,16 @@ export class UsersService {
     return this.http.patch<Result>(URL, '')
     .pipe(
       debounceTime(500),
+      catchError(this.base.handleError)
+    );
+  }
+
+  //  当前用户是否登录
+  isLogged(): Observable<Result> {
+    const URL = `${ROUTER_PREFIX}/api/accounts/islogged`;
+    return this.http.get<Result>(URL)
+    .pipe(
+      retry(1),
       catchError(this.base.handleError)
     );
   }

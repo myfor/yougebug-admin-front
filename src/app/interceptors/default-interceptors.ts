@@ -40,25 +40,21 @@ export class DefaultInterceptor implements HttpInterceptor {
                                 resp.body.isFault = true;
                                 return of(resp);
                             }
-                            case 401: {
-                                Global.loginggOut();
-                                resp.body.message = '';
-                                resp.body.isFault = true;
-                                return of(resp);
-                            }
                             default: return of(resp);
                         }
                     }
                     return of(resp);
                 }),
                 catchError((err: HttpErrorResponse) => {
-                    this.common.snackOpen(err.message);
                     switch (err.status) {
                         case 401:  {
                             Global.loginggOut();
                             this.router.navigateByUrl('/auth/login');
                         }          break;
-                        default: return throwError(err);
+                        default: {
+                            this.common.snackOpen(err.message);
+                            return throwError(err);
+                        }
                     }
                 })
             );
