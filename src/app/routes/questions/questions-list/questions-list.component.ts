@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { QuestionsService, QuestionItem } from '../../../services/questions.service';
 import { PageEvent, MatSlideToggleChange } from '@angular/material';
-import { CommonService } from 'app/services/common.service';
+import { CommonService, State } from 'app/services/common.service';
 import { interval } from 'rxjs';
 import { take } from 'rxjs/operators';
 
@@ -73,8 +73,8 @@ export class QuestionsListComponent implements OnInit {
           value.checked = false;
           return;
         }
-        currentItem.state.key = this.common.enabledState.key;
-        currentItem.state.value = this.common.enabledState.value;
+        currentItem.state.key = State.enabled.key;
+        currentItem.state.value = State.enabled.value;
       });
     } else {
       this.question.disabledQuestion(currentId)
@@ -84,8 +84,8 @@ export class QuestionsListComponent implements OnInit {
           value.checked = true;
           return;
         }
-        currentItem.state.key = this.common.disabledState.key;
-        currentItem.state.value = this.common.disabledState.value;
+        currentItem.state.key = State.disabled.key;
+        currentItem.state.value = State.disabled.value;
       });
     }
   }
@@ -105,8 +105,8 @@ export class QuestionsListComponent implements OnInit {
       }
       this.dataSource.map((v, i) => {
         if (v.id === id) {
-          v.state.key = this.common.removeState.key;
-          v.state.value = this.common.removeState.value;
+          v.state.key = State.remove.key;
+          v.state.value = State.remove.value;
           return;
       }
       });

@@ -6,21 +6,6 @@ import { KeyValue } from '@angular/common';
   providedIn: 'root'
 })
 export class CommonService {
-  //  状态，禁用
-  disabledState: KeyValue<number, string> = {
-    key: 0,
-    value: '禁用'
-  };
-  //  状态，启用
-  enabledState: KeyValue<number, string> = {
-    key: 1,
-    value: '启用'
-  };
-  //  状态，移除
-  removeState: KeyValue<number, string> = {
-    key: 2,
-    value: '移除'
-  };
 
   constructor(
     private snack: MatSnackBar
@@ -35,4 +20,22 @@ export class CommonService {
       duration,
     });
   }
+}
+
+export class State {
+  //  状态，禁用
+  static disabled: KeyValue<number, string> = {
+    key: 0,
+    value: '禁用'
+  };
+  //  状态，启用
+  static enabled: KeyValue<number, string> = {
+    key: 1,
+    value: '启用'
+  };
+  //  状态，移除
+  static remove: KeyValue<number, string> = {
+    key: 2,
+    value: '移除'
+  };
 }
