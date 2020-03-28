@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { ServicesBase, Result, Paginator, ROUTER_PREFIX } from './common';
 import { Observable } from 'rxjs';
 import { debounceTime, retry, catchError } from 'rxjs/operators';
@@ -10,7 +10,7 @@ export interface QuestionItem {
   id: number;
   title: string;
   description: string;
-  state: number;
+  state: KeyValue<number, string>;
   createDate: string;
 }
 
@@ -68,6 +68,15 @@ export class QuestionsService {
     .pipe(
       debounceTime(500),
       retry(1),
+      catchError(this.base.handleError)
+    );
+  }
+
+  deleteQuestion(id: number): Observable<Result> {
+    const URL = `${ROUTER_PREFIX}/api/questions/${id}`;
+    return this.http.delete<Result>(URL)
+    .pipe(
+      debounceTime(500),
       catchError(this.base.handleError)
     );
   }

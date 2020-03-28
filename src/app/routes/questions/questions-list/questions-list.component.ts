@@ -12,6 +12,9 @@ import { take } from 'rxjs/operators';
 })
 export class QuestionsListComponent implements OnInit {
 
+  REMOVE = 2;
+  REMOVE_DESCRIPTION = '已移除';
+
   index = 1;
   searchTitle = '';
   size = 0;
@@ -20,7 +23,7 @@ export class QuestionsListComponent implements OnInit {
     //  { id: 0, title: 'title', description: 'description', state: 0, createDate: '2020[20[20' }
   ];
 
-  columnsToDisplay = ['title', 'description', 'createDate', 'action' ];
+  columnsToDisplay = ['title', 'description', 'createDate', 'state', 'action' ];
 
   constructor(
     private question: QuestionsService,
@@ -53,23 +56,36 @@ export class QuestionsListComponent implements OnInit {
     const disabledInterval$ = interval(1000).pipe(take(1));
     disabledInterval$.subscribe(() => value.source.disabled = false);
 
+    const currentId = parseInt(value.source.id, null);
+    let currentItem: QuestionItem;
+    this.dataSource.map((v, i) => {
+      if (v.id === currentId) {
+        currentItem = v;
+        return;
+      }
+    });
+
     if (value.checked) {
-      this.question.enabledQuestion(parseInt(value.source.id, null))
+      this.question.enabledQuestion(currentId)
       .subscribe(r => {
         if (r.isFault) {
           this.common.snackOpen(r.message, 3000);
           value.checked = false;
           return;
         }
+        currentItem.state.key = 1;
+        currentItem.state.value = '启用';
       });
     } else {
-      this.question.disabledQuestion(parseInt(value.source.id, null))
+      this.question.disabledQuestion(currentId)
       .subscribe(r => {
         if (r.isFault) {
           this.common.snackOpen(r.message, 3000);
           value.checked = true;
           return;
         }
+        currentItem.state.key = 0;
+        currentItem.state.value = '禁用';
       });
     }
   }
@@ -78,5 +94,22 @@ export class QuestionsListComponent implements OnInit {
     title = title.trim();
     this.searchTitle = title;
     this.getQuestionsList();
+  }
+
+  //  软删除
+  detele(id: number) {
+    this.question.deleteQuestion(id).subscribe(r => {
+      if (r.isFault) {
+        this.common.snackOpen(r.message, 3000);
+        return;
+      }
+      this.dataSource.map((v, i) => {
+        if (v.id === id) {
+          v.state.key = this.REMOVE;
+          v.state.value = this.REMOVE_DESCRIPTION;
+          return;
+      }
+      });
+    });
   }
 }
