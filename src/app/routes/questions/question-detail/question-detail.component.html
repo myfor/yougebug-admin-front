@@ -35,9 +35,7 @@
     </div>
     <mat-form-field>
       <mat-label>问题描述</mat-label>
-      <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="2">
-        {{detail.description}}
-      </textarea>
+      <markdown [data]="detail.description"></markdown>
     </mat-form-field>
       <div *ngFor="let answer of detail.page.list">
         <app-answers-item [answer]="answer"></app-answers-item>

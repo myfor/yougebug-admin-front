@@ -6,12 +6,14 @@ import { QuestionsListComponent } from './questions-list/questions-list.componen
 import { QuestionDetailComponent } from './question-detail/question-detail.component';
 import { AnswersItemComponent } from './answers-item/answers-item.component';
 
+import { MarkdownModule } from 'ngx-markdown';
 
 @NgModule({
   declarations: [QuestionsListComponent, QuestionDetailComponent, AnswersItemComponent],
   imports: [
     SharedModule,
-    QuestionsRoutingModule
+    QuestionsRoutingModule,
+    MarkdownModule.forChild()
   ]
 })
 export class QuestionsModule { }

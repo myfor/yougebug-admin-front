@@ -8,7 +8,7 @@
     </span>
     <span class="m-l-3">当前状态：{{answer.state.value}}</span>
     <p>
-      {{answer.content}}
+      <markdown [data]="answer.content"></markdown>
     </p>
   </div>
   <div [ngSwitch]="answer.state.key">

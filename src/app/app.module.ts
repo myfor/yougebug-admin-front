@@ -10,6 +10,8 @@ import { ThemeModule } from './theme/theme.module';
 import { RoutesModule } from './routes/routes.module';
 import { AppComponent } from './app.component';
 
+import { MarkdownModule, MarkedOptions, MarkedRenderer } from 'ngx-markdown';
+
 import { DefaultInterceptor } from '@core';
 import { StartupService } from '@core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -27,6 +29,7 @@ export function StartupServiceFactory(startupService: StartupService) {
     ThemeModule,
     RoutesModule,
     BrowserAnimationsModule,
+    MarkdownModule.forRoot()
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: DefaultInterceptor, multi: true },
