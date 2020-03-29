@@ -38,4 +38,9 @@ export class State {
     key: 2,
     value: '移除'
   };
+  //  状态，待审核
+  static toAudit: KeyValue<number, string> = {
+    key: 3,
+    value: '待审核'
+  };
 }

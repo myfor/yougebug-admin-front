@@ -51,7 +51,7 @@ export class AnswersService {
     );
   }
 
-  disabled(id: number): Observable<Result> {
+  disabled(id: number, description: string): Observable<Result> {
     const URL = `${ROUTER_PREFIX}/api/answers/${id}/disabled`;
     return this.http.patch<Result>(URL, '')
     .pipe(

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AnswersService, AnswerItem } from '../../../services/answers.service';
-import { CommonService } from '../../../services/common.service';
+import { CommonService, State } from '../../../services/common.service';
 
 @Component({
   selector: 'app-answers-item',
@@ -27,22 +27,26 @@ export class AnswersItemComponent implements OnInit {
         this.common.snackOpen(r.message, 3000);
         return;
       } else {
-        this.answer.state.key = 1,
-        this.answer.state.value = '启用';
+        this.answer.state.key = State.enabled.key,
+        this.answer.state.value = State.enabled.value;
       }
     });
   }
 
   //  禁用
-  disabled() {
-    this.answerService.disabled(this.answer.id)
+  disabled(source: string) {
+    if (!source) {
+      this.common.snackOpen('请填写禁用原因', 3000);
+      return;
+    }
+    this.answerService.disabled(this.answer.id, source)
     .subscribe(r => {
       if (r.isFault) {
         this.common.snackOpen(r.message, 3000);
         return;
       } else {
-        this.answer.state.key = 0,
-        this.answer.state.value = '禁用';
+        this.answer.state.key = State.disabled.key,
+        this.answer.state.value = State.disabled.value;
       }
     });
   }

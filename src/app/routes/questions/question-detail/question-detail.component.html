@@ -33,10 +33,8 @@
         {{detail.user.account}}
       </div>
     </div>
-    <mat-form-field>
-      <mat-label>问题描述</mat-label>
-      <markdown [data]="detail.description"></markdown>
-    </mat-form-field>
+    <small>提问描述：</small>
+    <markdown [data]="detail.description"></markdown>
       <div *ngFor="let answer of detail.page.list">
         <app-answers-item [answer]="answer"></app-answers-item>
       </div>

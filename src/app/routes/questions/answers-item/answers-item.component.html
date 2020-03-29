@@ -7,12 +7,16 @@
       {{answer.userName}}
     </span>
     <span class="m-l-3">当前状态：{{answer.state.value}}</span>
-    <p>
-      <markdown [data]="answer.content"></markdown>
-    </p>
+
+    <markdown [data]="answer.content"></markdown>
+
   </div>
   <div [ngSwitch]="answer.state.key">
     <button mat-raised-button color="primary" *ngSwitchCase="0" (click)="enabled()">启用</button>
-    <button mat-raised-button color="warn" *ngSwitchCase="1" (click)="disabled()">禁用</button>
+    <div *ngSwitchCase="1">
+      <button mat-raised-button color="warn" (click)="disabled(disabledSource.value)">禁用</button>
+      <input matInput #disabledSource placeholder="禁用原因">
+    </div>
+    <button mat-raised-button color="primary" *ngSwitchCase="3" (click)="enabled()">通过审核</button>
   </div>
 </div>
