@@ -13,9 +13,13 @@
   </div>
   <div [ngSwitch]="answer.state.key">
     <button mat-raised-button color="primary" *ngSwitchCase="0" (click)="enabled()">启用</button>
-    <div *ngSwitchCase="1">
-      <button mat-raised-button color="warn" (click)="disabled(disabledSource.value)">禁用</button>
-      <input matInput #disabledSource placeholder="禁用原因">
+    <div *ngSwitchCase="1" class="d-display-action">
+      <div class="m-r-3">
+        <button mat-raised-button color="warn" (click)="disabled(disabledSource.value)">禁用</button>
+      </div>
+      <mat-form-field>
+        <input matInput #disabledSource placeholder="禁用原因">
+      </mat-form-field>
     </div>
     <button mat-raised-button color="primary" *ngSwitchCase="3" (click)="enabled()">通过审核</button>
   </div>

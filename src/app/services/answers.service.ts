@@ -52,7 +52,7 @@ export class AnswersService {
   }
 
   disabled(id: number, description: string): Observable<Result> {
-    const URL = `${ROUTER_PREFIX}/api/answers/${id}/disabled`;
+    const URL = `${ROUTER_PREFIX}/api/answers/${id}/disabled?description=${description}`;
     return this.http.patch<Result>(URL, '')
     .pipe(
       debounceTime(500),

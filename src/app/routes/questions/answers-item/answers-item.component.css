@@ -10,3 +10,9 @@
 .d-info {
   flex-grow: 1;
 }
+
+.d-display-action {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
