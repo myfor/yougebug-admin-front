@@ -11,6 +11,9 @@
     <markdown [data]="answer.content"></markdown>
 
   </div>
+  <div class="m-b-3">
+    <mat-divider></mat-divider>
+  </div>
   <div [ngSwitch]="answer.state.key">
     <button mat-raised-button color="primary" *ngSwitchCase="0" (click)="enabled()">启用</button>
     <div *ngSwitchCase="1" class="d-display-action">
