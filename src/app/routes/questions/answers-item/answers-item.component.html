@@ -24,6 +24,7 @@
         <input matInput #disabledSource placeholder="禁用原因">
       </mat-form-field>
     </div>
+    <button mat-raised-button color="primary" *ngSwitchCase="2" (click)="enabled()">重新启用</button>
     <button mat-raised-button color="primary" *ngSwitchCase="3" (click)="enabled()">通过审核</button>
   </div>
 </div>
