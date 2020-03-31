@@ -9,7 +9,11 @@ import { AnswersItemComponent } from './answers-item/answers-item.component';
 import { MarkdownModule } from 'ngx-markdown';
 
 @NgModule({
-  declarations: [QuestionsListComponent, QuestionDetailComponent, AnswersItemComponent],
+  declarations: [
+    QuestionsListComponent,
+    QuestionDetailComponent,
+    AnswersItemComponent
+  ],
   imports: [
     SharedModule,
     QuestionsRoutingModule,

@@ -12,11 +12,10 @@ import { take } from 'rxjs/operators';
 })
 export class QuestionsListComponent implements OnInit {
 
-  REMOVE = 2;
-  REMOVE_DESCRIPTION = '已移除';
+  searchTitle = '';
+  selectedState = '';
 
   index = 1;
-  searchTitle = '';
   size = 0;
   totalSize = 0;
   dataSource: QuestionItem[] = [
@@ -40,7 +39,7 @@ export class QuestionsListComponent implements OnInit {
   }
 
   private getQuestionsList() {
-    this.question.getQuestions(this.index, this.searchTitle).subscribe(result => {
+    this.question.getQuestions(this.index, this.searchTitle, this.selectedState).subscribe(result => {
       if (result.isFault) {
         this.common.snackOpen(result.message, 2000);
         return;
@@ -90,9 +89,10 @@ export class QuestionsListComponent implements OnInit {
     }
   }
 
-  search(title: string) {
+  search(title: string, selectedState: string) {
     title = title.trim();
     this.searchTitle = title;
+    this.selectedState = selectedState;
     this.getQuestionsList();
   }
 

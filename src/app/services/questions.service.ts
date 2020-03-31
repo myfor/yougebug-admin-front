@@ -42,10 +42,13 @@ export class QuestionsService {
     private http: HttpClient
   ) { }
 
-  getQuestions(index: number, search = '', size = 20): Observable<Result<Paginator>> {
+  getQuestions(index: number, search = '', state: string, size = 20): Observable<Result<Paginator>> {
     let p = new HttpParams();
     if (search) {
       p = p.append('search', search);
+    }
+    if (state) {
+      p = p.append('state', state);
     }
     if (index <= 0) {
       index = 1;
@@ -53,7 +56,7 @@ export class QuestionsService {
     p = p.append('index', index.toString())
         .append('size', size.toString());
     const URL = `${ROUTER_PREFIX}/api/questions?${p.toString()}`;
-    //  console.log(URL);
+    console.log(URL);
     return this.http.get<Result<Paginator<QuestionItem>>>(URL)
     .pipe(
       debounceTime(1000),

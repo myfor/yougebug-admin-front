@@ -4,7 +4,17 @@
     <input matInput type="text" #txt_title placeholder="搜索标题">
   </mat-form-field>
   &nbsp;&nbsp;&nbsp;&nbsp;
-  <button mat-raised-button color="primary" (click)="search(txt_title.value)">搜索</button>
+  <mat-form-field>
+    <mat-select #sel_state placeholder="选择状态">
+      <mat-option value="">全部</mat-option>
+      <mat-option value="0">禁用</mat-option>
+      <mat-option value="1">启用</mat-option>
+      <mat-option value="2">移除</mat-option>
+      <mat-option value="3">待审核</mat-option>
+    </mat-select>
+  </mat-form-field>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <button mat-raised-button color="primary" (click)="search(txt_title.value, sel_state.value)">搜索</button>
 </div>
 <table mat-table [dataSource]="dataSource">
   <ng-container matColumnDef="title">
