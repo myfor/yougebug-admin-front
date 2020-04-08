@@ -22,7 +22,7 @@ export class QuestionsListComponent implements OnInit {
     //  { id: 0, title: 'title', description: 'description', state: 0, createDate: '2020[20[20' }
   ];
 
-  columnsToDisplay = ['title', 'description', 'createDate', 'state', 'action' ];
+  columnsToDisplay = ['title', 'description', 'answersCount', 'createDate', 'state', 'action' ];
 
   constructor(
     private question: QuestionsService,

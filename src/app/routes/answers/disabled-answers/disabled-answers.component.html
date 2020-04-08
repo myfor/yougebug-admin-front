@@ -1,37 +1,32 @@
 <page-header></page-header>
 <div>
   <mat-form-field>
-    <input matInput type="text" #txt_title placeholder="搜索标题">
+    <input matInput type="text" #txt_title placeholder="搜索所属提问的标题">
   </mat-form-field>
   &nbsp;&nbsp;&nbsp;&nbsp;
-  <mat-form-field>
-    <mat-select #sel_state placeholder="选择状态">
-      <mat-option value="">全部</mat-option>
-      <mat-option value="0">禁用</mat-option>
-      <mat-option value="1">启用</mat-option>
-      <mat-option value="2">移除</mat-option>
-      <mat-option value="3">待审核</mat-option>
-    </mat-select>
-  </mat-form-field>
-  &nbsp;&nbsp;&nbsp;&nbsp;
-  <button mat-raised-button color="primary" (click)="search(txt_title.value, sel_state.value)">搜索</button>
+  
+  <button mat-raised-button color="primary" (click)="search(txt_title.value)">搜索</button>
 </div>
 <table mat-table [dataSource]="dataSource">
   <ng-container matColumnDef="title">
-    <th mat-header-cell *matHeaderCellDef>标题</th>
-    <td mat-cell *matCellDef="let element">{{element.title}}</td>
+    <th mat-header-cell *matHeaderCellDef>所属提问</th>
+    <td mat-cell *matCellDef="let element">{{element.questionTitle}}</td>
   </ng-container>
-  <ng-container matColumnDef="description">
-    <th mat-header-cell *matHeaderCellDef>简述</th>
-    <td mat-cell *matCellDef="let element">{{element.description}}</td>
+  <ng-container matColumnDef="content">
+    <th mat-header-cell *matHeaderCellDef>回答简述</th>
+    <td mat-cell *matCellDef="let element">{{element.content}}</td>
   </ng-container>
-  <ng-container matColumnDef="answersCount">
-    <th mat-header-cell *matHeaderCellDef>回答数</th>
-    <td mat-cell *matCellDef="let element">{{element.answersCount}}</td>
+  <ng-container matColumnDef="votes">
+    <th mat-header-cell *matHeaderCellDef>赞同数</th>
+    <td mat-cell *matCellDef="let element">{{element.votes}}</td>
   </ng-container>
   <ng-container matColumnDef="createDate">
-    <th mat-header-cell *matHeaderCellDef>创建日期</th>
+    <th mat-header-cell *matHeaderCellDef>回答日期</th>
     <td mat-cell *matCellDef="let element">{{element.createDate}}</td>
+  </ng-container>
+  <ng-container matColumnDef="answererName">
+    <th mat-header-cell *matHeaderCellDef>回答人名字</th>
+    <td mat-cell *matCellDef="let element">{{element.answererName}}</td>
   </ng-container>
   <ng-container matColumnDef="state">
     <th mat-header-cell *matHeaderCellDef>当前状态</th>

@@ -4,6 +4,7 @@ import { ServicesBase, Result, Paginator, ROUTER_PREFIX } from './common';
 import { Observable } from 'rxjs';
 import { debounceTime, retry, catchError } from 'rxjs/operators';
 import { KeyValue } from '@angular/common';
+import { State } from './common.service';
 
 export interface AnswerItem {
   id: number;
@@ -13,6 +14,16 @@ export interface AnswerItem {
   userId: number;
   userName: string;
   avatar: string;
+  state: KeyValue<number, string>;
+}
+
+export interface AnswerItemAll {
+  id: number;
+  questionTitle: string;
+  content: string;
+  votes: number;
+  createDate: string;
+  answererName: string;
   state: KeyValue<number, string>;
 }
 
@@ -39,6 +50,29 @@ export class AnswersService {
       retry(1),
       catchError(this.base.handleError)
     );
+  }
+
+  //  获取所有禁用的答案列表
+  getAllDisabledAnswers(index: number, row: number, questionTitle: string): Observable<Result<Paginator<AnswerItemAll>>> {
+    return this.getAllAnswers(index, row, State.disabled, questionTitle);
+  }
+
+  getAllAnswers(index: number, row: number, state: State, questionTitle: string): Observable<Result<Paginator<AnswerItemAll>>> {
+    questionTitle = questionTitle.trim();
+
+    const P: HttpParams = new HttpParams()
+    .append('index', index.toString())
+    .append('size', row.toString())
+    .append('state', state.toString())
+    .append('questionTitle', questionTitle ? questionTitle : '');
+
+    const URL = `${ROUTER_PREFIX}/api/answers/all?${P.toString()}`;
+    return this.http.get<Result>(URL)
+      .pipe(
+        debounceTime(500),
+        retry(1),
+        catchError(this.base.handleError)
+      );
   }
 
   enabled(id: number): Observable<Result> {
