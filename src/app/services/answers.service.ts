@@ -57,7 +57,7 @@ export class AnswersService {
     return this.getAllAnswers(index, row, State.disabled, questionTitle);
   }
 
-  getAllAnswers(index: number, row: number, state: State, questionTitle: string): Observable<Result<Paginator<AnswerItemAll>>> {
+  private getAllAnswers(index: number, row: number, state: State, questionTitle: string): Observable<Result<Paginator<AnswerItemAll>>> {
     questionTitle = questionTitle.trim();
 
     const P: HttpParams = new HttpParams()

@@ -2,11 +2,11 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { AnswersRoutingModule } from './answers-routing.module';
-import { DisabledAnswersComponent } from './disabled-answers/disabled-answers.component';
+import { AnswersComponent } from './answers/answers.component';
 
 
 @NgModule({
-  declarations: [DisabledAnswersComponent],
+  declarations: [AnswersComponent],
   imports: [
     CommonModule,
     AnswersRoutingModule
