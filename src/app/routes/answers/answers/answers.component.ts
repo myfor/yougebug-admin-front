@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AnswersService, AnswerItemAll } from '../../../services/answers.service';
 import { CommonService, State } from 'app/services/common.service';
+import { PageEvent } from '@angular/material';
 
 @Component({
   selector: 'app-answers',
@@ -40,5 +41,10 @@ export class AnswersComponent implements OnInit {
         this.dataSource = r.data.list;
       }
     });
+  }
+
+  pageChange(page: PageEvent) {
+    this.index = page.pageIndex + 1;
+    
   }
 }
