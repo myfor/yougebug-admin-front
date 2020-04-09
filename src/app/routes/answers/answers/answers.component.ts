@@ -14,6 +14,10 @@ export class AnswersComponent implements OnInit {
   size = 20;
   totalSize = 0;
   questionTitle = '';
+  selectedState = '';
+
+  notData = false;
+
   dataSource: AnswerItemAll[] = [];
 
   columnsToDisplay = ['questionTitle', 'content', 'votes', 'createDate', 'answererName', 'state', 'action' ];
@@ -26,25 +30,33 @@ export class AnswersComponent implements OnInit {
   ngOnInit() {
   }
 
-  search(questionTitle: string) {
+  search(questionTitle: string, state: string) {
     this.questionTitle = questionTitle;
+    this.selectedState = state;
     this.getList();
   }
 
   private getList() {
-    this.answer.getAllDisabledAnswers(this.index, this.size, this.questionTitle)
+    if (!this.selectedState) {
+      this.dataSource = [];
+      return;
+    }
+    this.answer.getAllDisabledAnswers(this.index, this.size, this.selectedState, this.questionTitle)
     .subscribe(r => {
       if (r.isFault) {
         this.common.snackOpen(r.message, 3000);
       } else {
         this.totalSize = r.data.totalRows;
         this.dataSource = r.data.list;
+        if (this.totalSize === 0) {
+          this.notData = true;
+        }
       }
     });
   }
 
   pageChange(page: PageEvent) {
     this.index = page.pageIndex + 1;
-    
+    this.getList();
   }
 }

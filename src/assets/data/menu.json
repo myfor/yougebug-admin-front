@@ -38,7 +38,7 @@
       "icon": "live_help",
       "children": [{
         "state": "",
-        "name": "禁用的回答列表",
+        "name": "回答列表",
         "type": "link"
       }]
     },

@@ -53,17 +53,17 @@ export class AnswersService {
   }
 
   //  获取所有禁用的答案列表
-  getAllDisabledAnswers(index: number, row: number, questionTitle: string): Observable<Result<Paginator<AnswerItemAll>>> {
-    return this.getAllAnswers(index, row, State.disabled, questionTitle);
+  getAllDisabledAnswers(index: number, row: number, state: string, questionTitle: string): Observable<Result<Paginator<AnswerItemAll>>> {
+    return this.getAllAnswers(index, row, state, questionTitle);
   }
 
-  private getAllAnswers(index: number, row: number, state: State, questionTitle: string): Observable<Result<Paginator<AnswerItemAll>>> {
+  private getAllAnswers(index: number, row: number, state: string, questionTitle: string): Observable<Result<Paginator<AnswerItemAll>>> {
     questionTitle = questionTitle.trim();
 
     const P: HttpParams = new HttpParams()
     .append('index', index.toString())
     .append('size', row.toString())
-    .append('state', state.toString())
+    .append('state', state)
     .append('questionTitle', questionTitle ? questionTitle : '');
 
     const URL = `${ROUTER_PREFIX}/api/answers/all?${P.toString()}`;
