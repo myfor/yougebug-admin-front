@@ -48,9 +48,8 @@ export class AnswersComponent implements OnInit {
       } else {
         this.totalSize = r.data.totalRows;
         this.dataSource = r.data.list;
-        if (this.totalSize === 0) {
-          this.notData = true;
-        }
+
+        this.notData = this.totalSize === 0;
       }
     });
   }
