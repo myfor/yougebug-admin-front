@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AnswersService, AnswerItemAll } from '../../../services/answers.service';
-import { CommonService, State } from 'app/services/common.service';
+import { CommonService } from 'app/services/common.service';
 import { PageEvent } from '@angular/material';
 
 @Component({
@@ -41,7 +41,7 @@ export class AnswersComponent implements OnInit {
       this.dataSource = [];
       return;
     }
-    this.answer.getAllDisabledAnswers(this.index, this.size, this.selectedState, this.questionTitle)
+    this.answer.getAllAnswers(this.index, this.size, this.selectedState, this.questionTitle)
     .subscribe(r => {
       if (r.isFault) {
         this.common.snackOpen(r.message, 3000);

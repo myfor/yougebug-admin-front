@@ -27,6 +27,15 @@ export interface AnswerItemAll {
   state: KeyValue<number, string>;
 }
 
+export interface AnswerDetail {
+  questionTitle: string;
+  questionContent: string;
+  questionAsker: string;
+  answerContent: string;
+  answererName: string;
+  answererAvatar: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -52,12 +61,8 @@ export class AnswersService {
     );
   }
 
-  //  获取所有禁用的答案列表
-  getAllDisabledAnswers(index: number, row: number, state: string, questionTitle: string): Observable<Result<Paginator<AnswerItemAll>>> {
-    return this.getAllAnswers(index, row, state, questionTitle);
-  }
-
-  private getAllAnswers(index: number, row: number, state: string, questionTitle: string): Observable<Result<Paginator<AnswerItemAll>>> {
+  //  获取所有答案列表
+  getAllAnswers(index: number, row: number, state: string, questionTitle: string): Observable<Result<Paginator<AnswerItemAll>>> {
     questionTitle = questionTitle.trim();
 
     const P: HttpParams = new HttpParams()
@@ -73,6 +78,29 @@ export class AnswersService {
         retry(1),
         catchError(this.base.handleError)
       );
+  }
+
+  //  获取详情
+  getAnswerDetail(id: number): Observable<Result<AnswerDetail>> {
+    const URL = `${ROUTER_PREFIX}/api/answers/${id}`;
+    return this.http.get<Result<AnswerDetail>>(URL)
+      .pipe(
+        debounceTime(500),
+        retry(1),
+        catchError(this.base.handleError)
+      );
+  }
+
+  get emptyAnswerDetail(): AnswerDetail {
+    const DETAIL: AnswerDetail = {
+      questionTitle: '',
+      questionContent: '',
+      questionAsker: '',
+      answerContent: '',
+      answererName: '',
+      answererAvatar: ''
+    };
+    return DETAIL;
   }
 
   enabled(id: number): Observable<Result> {
