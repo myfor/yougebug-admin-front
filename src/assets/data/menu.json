@@ -35,7 +35,7 @@
       "state": "answers",
       "name": "答案管理",
       "type": "sub",
-      "icon": "live_help",
+      "icon": "chat_bubble",
       "children": [{
         "state": "",
         "name": "回答列表",
