@@ -26,10 +26,16 @@
       "type": "sub",
       "icon": "live_help",
       "children": [{
-        "state": "",
+        "state": "list",
         "name": "提问列表",
         "type": "link"
-      }]
+      },
+      {
+        "state": "reports",
+        "name": "举报列表",
+        "type": "link"
+      }
+    ]
     },
     {
       "state": "answers",

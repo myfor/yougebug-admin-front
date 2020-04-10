@@ -7,12 +7,14 @@ import { QuestionDetailComponent } from './question-detail/question-detail.compo
 import { AnswersItemComponent } from './answers-item/answers-item.component';
 
 import { MarkdownModule } from 'ngx-markdown';
+import { ReportsComponent } from './reports/reports.component';
 
 @NgModule({
   declarations: [
     QuestionsListComponent,
     QuestionDetailComponent,
-    AnswersItemComponent
+    AnswersItemComponent,
+    ReportsComponent
   ],
   imports: [
     SharedModule,
