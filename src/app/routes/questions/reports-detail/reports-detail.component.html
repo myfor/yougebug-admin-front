@@ -1,1 +1,20 @@
-<p>reports-detail works!</p>
+<page-header></page-header>
+<div class="back">
+  <app-back></app-back>
+  &nbsp;&nbsp;
+
+</div>
+<div class="m-b-3">
+  <h3>标题</h3>
+  <markdown [data]="'内容'"></markdown>
+</div>
+<div class="report">
+  <div class="reason">举报理由</div>
+  <div class="content">具体描述</div>
+</div>
+<div class="report">
+  <div class="reason">举报理由</div>
+  <div class="content">具体描述</div>
+</div>
+<mat-paginator showFirstLastButtons [pageSize]="20" [length]="detail.reports.totalRows" (page)="pageChange($event)">
+</mat-paginator>

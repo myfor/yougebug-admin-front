@@ -13,6 +13,17 @@ export interface ReportQuestionItem {
   reportCount: number;
   state: KeyValue<number, string>;
 }
+//  被举报的提问详情
+export interface ReportQuestionDetail {
+  title: string;
+  content: string;
+  state: KeyValue<number, string>;
+  reports: Paginator<Report>;
+}
+export interface Report {
+  reason: string;
+  content: string;
+}
 
 export interface QuestionItem {
   id: number;
@@ -63,6 +74,19 @@ export class QuestionsService {
     }
     const URL = `${ROUTER_PREFIX}/api/questions/reports?${p.toString()}`;
     return this.http.get<Result<Paginator<ReportQuestionItem>>>(URL)
+    .pipe(
+      debounceTime(1000),
+      retry(1),
+      catchError(this.base.handleError)
+    );
+  }
+  //  获取举报的问题的详情
+  getReportQuestionDetail(questionId: number, index: number): Observable<Result<ReportQuestionDetail>> {
+    let p = new HttpParams();
+    p = p.append('index', index.toString());
+    const URL = `${ROUTER_PREFIX}/api/questions/report/${questionId}?${p.toString()}`;
+
+    return this.http.get<Result<ReportQuestionDetail>>(URL)
     .pipe(
       debounceTime(1000),
       retry(1),
@@ -131,5 +155,24 @@ export class QuestionsService {
       retry(1),
       catchError(this.base.handleError)
     );
+  }
+
+  get emptyReportQuestionDetail(): ReportQuestionDetail {
+    const detail: ReportQuestionDetail = {
+      title: '',
+      content: '',
+      state: {
+        key: 0,
+        value: ''
+      },
+      reports: {
+        index: 1,
+        size: 0,
+        totalRows: 0,
+        totalPages: 0,
+        list: []
+      }
+    };
+    return detail;
   }
 }

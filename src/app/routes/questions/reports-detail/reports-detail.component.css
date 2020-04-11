@@ -1,0 +1,17 @@
+.report {
+  padding: .5rem 1rem;
+  border: 1px solid #acacac;
+  border-radius: 8px;
+  padding: 1rem;
+  margin: .2rem 0;
+  border-left: 3px solid #3f51b5;
+}
+
+.report > .reason {
+    padding: .5rem 0rem;
+    border-bottom: 1px solid #3f51b5;
+}
+
+.report > .content {
+    padding: .5rem 0rem;
+}
