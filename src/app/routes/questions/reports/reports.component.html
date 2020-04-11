@@ -13,7 +13,7 @@
   </ng-container>
   <ng-container matColumnDef="reportCount">
     <th mat-header-cell *matHeaderCellDef>回答数</th>
-    <td mat-cell *matCellDef="let element">{{element.answersCount}}</td>
+    <td mat-cell *matCellDef="let element">{{element.reportCount}}</td>
   </ng-container>
   <ng-container matColumnDef="state">
     <th mat-header-cell *matHeaderCellDef>当前状态</th>
@@ -29,16 +29,11 @@
   <ng-container matColumnDef="action">
     <th mat-header-cell *matHeaderCellDef>操作</th>
     <td mat-cell *matCellDef="let element">
-      <mat-slide-toggle [checked]="element.state.key === 1" [id]="element.id" (change)="enabledOrDisabled($event)">启用
-      </mat-slide-toggle>
-      &nbsp;
       <a [routerLink]="['/questions', element.id]" mat-stroked-button color="primary">详情</a>
-      &nbsp;
-      <button *ngIf="element.state.key !== 2" mat-raised-button color="warn" (click)="detele(element.id)">删除</button>
     </td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
   <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
 </table>
-<mat-paginator showFirstLastButtons [pageSize]="size" [length]="totalSize" (page)="pageChange($event)"></mat-paginator>
+<mat-paginator showFirstLastButtons [pageSize]="20" [length]="totalSize" (page)="pageChange($event)"></mat-paginator>

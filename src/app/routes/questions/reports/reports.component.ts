@@ -14,6 +14,7 @@ export class ReportsComponent implements OnInit {
   totalSize = 0;
   searchTitle = '';
   dataSource: ReportQuestionItem[] = [];
+  columnsToDisplay = ['title', 'reportCount', 'state', 'action' ];
 
   constructor(
     private question: QuestionsService,
@@ -30,6 +31,7 @@ export class ReportsComponent implements OnInit {
         this.common.snackOpen(r.message, 3000);
       } else {
         this.dataSource = r.data.list;
+        this.totalSize = r.data.totalRows;
       }
     });
   }

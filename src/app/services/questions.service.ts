@@ -51,13 +51,13 @@ export class QuestionsService {
     private http: HttpClient
   ) { }
 
-  getReportQuestion(index: number, title: string): Observable<Result<Paginator<ReportQuestionItem>>> {
+  getReportQuestion(index: number, title: string, size: number = 20): Observable<Result<Paginator<ReportQuestionItem>>> {
     title = title;
     let p = new HttpParams();
     if (index <= 0) {
       index = 1;
     }
-    p = p.append('index', index.toString());
+    p = p.append('index', index.toString()).append('size', size.toString());
     if (title) {
       p = p.append('title', title);
     }
