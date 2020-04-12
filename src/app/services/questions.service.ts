@@ -18,7 +18,6 @@ export interface ReportQuestionDetail {
   title: string;
   content: string;
   state: KeyValue<number, string>;
-  reports: Paginator<Report>;
 }
 export interface Report {
   reason: string;
@@ -81,12 +80,19 @@ export class QuestionsService {
     );
   }
   //  获取举报的问题的详情
-  getReportQuestionDetail(questionId: number, index: number): Observable<Result<ReportQuestionDetail>> {
-    let p = new HttpParams();
-    p = p.append('index', index.toString());
-    const URL = `${ROUTER_PREFIX}/api/questions/report/${questionId}?${p.toString()}`;
-
+  getReportQuestionDetail(questionId: number): Observable<Result<ReportQuestionDetail>> {
+    const URL = `${ROUTER_PREFIX}/api/questions/report/${questionId}`;
     return this.http.get<Result<ReportQuestionDetail>>(URL)
+    .pipe(
+      debounceTime(1000),
+      retry(1),
+      catchError(this.base.handleError)
+    );
+  }
+  //  获取提问的举报列表
+  getReports(questionId: number, index: number): Observable<Result<Paginator<Report>>> {
+    const URL = `${ROUTER_PREFIX}/api/questionReports/${questionId}?index=${index}`;
+    return this.http.get<Result<Paginator<Report>>>(URL)
     .pipe(
       debounceTime(1000),
       retry(1),
@@ -164,13 +170,6 @@ export class QuestionsService {
       state: {
         key: 0,
         value: ''
-      },
-      reports: {
-        index: 1,
-        size: 0,
-        totalRows: 0,
-        totalPages: 0,
-        list: []
       }
     };
     return detail;

@@ -16,5 +16,5 @@
   <div class="reason">举报理由</div>
   <div class="content">具体描述</div>
 </div>
-<mat-paginator showFirstLastButtons [pageSize]="20" [length]="detail.reports.totalRows" (page)="pageChange($event)">
+<mat-paginator showFirstLastButtons [pageSize]="20" [length]="totalReportSize" (page)="pageChange($event)">
 </mat-paginator>
