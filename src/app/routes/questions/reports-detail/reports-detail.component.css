@@ -1,3 +1,8 @@
+.back {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
 .report {
   padding: .5rem 1rem;
   border: 1px solid #acacac;

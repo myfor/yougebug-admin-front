@@ -61,6 +61,7 @@ export class QuestionsService {
     private http: HttpClient
   ) { }
 
+  //  获取举报的提问列表
   getReportQuestion(index: number, title: string, size: number = 20): Observable<Result<Paginator<ReportQuestionItem>>> {
     title = title;
     let p = new HttpParams();
@@ -81,7 +82,7 @@ export class QuestionsService {
   }
   //  获取举报的问题的详情
   getReportQuestionDetail(questionId: number): Observable<Result<ReportQuestionDetail>> {
-    const URL = `${ROUTER_PREFIX}/api/questions/report/${questionId}`;
+    const URL = `${ROUTER_PREFIX}/api/questions/reports/${questionId}`;
     return this.http.get<Result<ReportQuestionDetail>>(URL)
     .pipe(
       debounceTime(1000),
@@ -100,6 +101,7 @@ export class QuestionsService {
     );
   }
 
+  //  获取提问列表
   getQuestions(index: number, search = '', state: string, size = 20): Observable<Result<Paginator>> {
     let p = new HttpParams();
     if (search) {

@@ -5,16 +5,12 @@
 
 </div>
 <div class="m-b-3">
-  <h3>标题</h3>
-  <markdown [data]="'内容'"></markdown>
+  <h3>{{detail.title}}</h3>
+  <markdown [data]="detail.content"></markdown>
 </div>
-<div class="report">
-  <div class="reason">举报理由</div>
-  <div class="content">具体描述</div>
-</div>
-<div class="report">
-  <div class="reason">举报理由</div>
-  <div class="content">具体描述</div>
+<div class="report" *ngFor="let report of reports">
+  <div class="reason">{{report.reason}}</div>
+  <div class="content">{{report.content}}</div>
 </div>
 <mat-paginator showFirstLastButtons [pageSize]="20" [length]="totalReportSize" (page)="pageChange($event)">
 </mat-paginator>
