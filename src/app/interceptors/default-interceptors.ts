@@ -4,7 +4,7 @@ import {
 } from '@angular/common/http';
 import { Observable, throwError, of } from 'rxjs';
 import { catchError, mergeMap } from 'rxjs/operators';
-import { FAULT } from '../services/common';
+import { FAULT } from '../services/common.service';
 import { Router } from '@angular/router';
 import { CommonService } from '../services/common.service';
 import { Global } from '../global';

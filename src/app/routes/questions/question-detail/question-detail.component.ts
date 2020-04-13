@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonService } from '../../../services/common.service';
-import { QuestionsService, QuestionDetail } from '../../../services/questions.service';
+import { QuestionsService, QuestionDetail } from '../../../services/questions/questions.service';
 import { ActivatedRoute } from '@angular/router';
 import { PageEvent } from '@angular/material';
 import { AnswersService } from '../../../services/answers.service';

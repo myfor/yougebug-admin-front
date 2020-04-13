@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, pipe } from 'rxjs';
-import { ServicesBase, Result, ROUTER_PREFIX } from '../common';
+import { Observable } from 'rxjs';
+import { ServicesBase, Result, ROUTER_PREFIX } from '../common.service';
 import { debounceTime, catchError, retry } from 'rxjs/operators';
 
 import sha256 from 'crypto-js/sha256';

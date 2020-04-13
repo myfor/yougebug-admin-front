@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PageEvent } from '@angular/material';
-import { QuestionsService, ReportQuestionDetail, Report } from '../../../services/questions.service';
+import { ReportQuestionsService, ReportQuestionDetail, Report } from '../../../services/questions/report-questions.service';
 import { CommonService } from '../../../services/common.service';
 
 @Component({
@@ -13,14 +13,14 @@ export class ReportsDetailComponent implements OnInit {
 
   id = 0;
   index = 1;
-  detail: ReportQuestionDetail = this.question.emptyReportQuestionDetail;
+  detail: ReportQuestionDetail = this.reportQuestion.emptyReportQuestionDetail;
 
   totalReportSize = 0;
   reports: Report[] = [];
 
   constructor(
     private common: CommonService,
-    private question: QuestionsService,
+    private reportQuestion: ReportQuestionsService,
     private route: ActivatedRoute
   ) { }
 
@@ -31,7 +31,7 @@ export class ReportsDetailComponent implements OnInit {
   }
 
   private getDetail() {
-    this.question.getReportQuestionDetail(this.id).subscribe(r => {
+    this.reportQuestion.getReportQuestionDetail(this.id).subscribe(r => {
       if (r.isFault) {
         this.common.snackOpen(r.message, 3000);
       } else {
@@ -41,7 +41,7 @@ export class ReportsDetailComponent implements OnInit {
   }
 
   private getReports() {
-    this.question.getReports(this.id, this.index)
+    this.reportQuestion.getReports(this.id, this.index)
     .subscribe(r => {
       if (r.isFault) {
         this.common.snackOpen(r.message, 3000);
@@ -55,5 +55,27 @@ export class ReportsDetailComponent implements OnInit {
   pageChange(pager: PageEvent) {
     this.index = pager.pageIndex + 1;
     this.getReports();
+  }
+
+  //  删除这个提问
+  delete(confirmText: string) {
+    if (confirmText !== '确认删除') {
+      this.common.snackOpen('请输入“确认删除”来删除');
+      return;
+    }
+
+  }
+
+  //  退回提问
+  back(reason: string) {
+    reason = reason.trim();
+    if (!reason) {
+      this.common.snackOpen('请输入退回理由', 3000);
+    }
+  }
+
+  //  忽略这次举报
+  ignore() {
+
   }
 }

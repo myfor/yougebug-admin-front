@@ -2,7 +2,19 @@
 <div class="back">
   <app-back></app-back>
   &nbsp;&nbsp;
-
+  <div class="w-100">
+    <mat-form-field>
+      <input matInput placeholder="输入“确认删除”以彻底删除" #txt_delete>
+    </mat-form-field>
+    <button mat-raised-button color="warn" (click)="delete(txt_delete.value)">彻底删除</button>
+    &nbsp;&nbsp;
+    <mat-form-field>
+      <input matInput placeholder="退回理由" #txt_reason>
+    </mat-form-field>
+    <button mat-raised-button color="accent" (click)="back(txt_reason.value)">退回处理</button>
+    &nbsp;&nbsp;
+    <button mat-raised-button color="primary">忽略处理</button>
+  </div>
 </div>
 <div class="m-b-3">
   <h3>{{detail.title}}</h3>

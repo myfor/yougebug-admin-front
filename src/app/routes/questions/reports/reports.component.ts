@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { QuestionsService, ReportQuestionItem } from '../../../services/questions.service';
+import { ReportQuestionsService, ReportQuestionItem } from '../../../services/questions/report-questions.service';
 import { CommonService } from '../../../services/common.service';
 import { PageEvent } from '@angular/material';
 
@@ -17,7 +17,7 @@ export class ReportsComponent implements OnInit {
   columnsToDisplay = ['title', 'reportCount', 'state', 'action' ];
 
   constructor(
-    private question: QuestionsService,
+    private reportQuestion: ReportQuestionsService,
     private common: CommonService
   ) { }
 
@@ -26,7 +26,7 @@ export class ReportsComponent implements OnInit {
   }
 
   private getList() {
-    this.question.getReportQuestion(this.index, this.searchTitle).subscribe(r => {
+    this.reportQuestion.getReportQuestion(this.index, this.searchTitle).subscribe(r => {
       if (r.isFault) {
         this.common.snackOpen(r.message, 3000);
       } else {

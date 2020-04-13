@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { ServicesBase, Result, Paginator, ROUTER_PREFIX } from './common';
+import { ServicesBase, Result, Paginator, ROUTER_PREFIX } from './common.service';
 import { Observable } from 'rxjs';
 import { debounceTime, retry, catchError } from 'rxjs/operators';
 import { KeyValue } from '@angular/common';
-import { State } from './common.service';
 
 export interface AnswerItem {
   id: number;

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { ServicesBase, Paginator, Result, ROUTER_PREFIX } from '../common';
+import { ServicesBase, Paginator, Result, ROUTER_PREFIX } from '../common.service';
 import { Observable } from 'rxjs';
 import { catchError, debounceTime, retry } from 'rxjs/operators';
 import { KeyValue } from '@angular/common';

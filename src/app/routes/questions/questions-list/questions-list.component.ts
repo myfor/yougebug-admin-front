@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { QuestionsService, QuestionItem } from '../../../services/questions.service';
+import { QuestionsService, QuestionItem } from '../../../services/questions/questions.service';
 import { PageEvent, MatSlideToggleChange } from '@angular/material';
 import { CommonService, State } from 'app/services/common.service';
 import { interval } from 'rxjs';
