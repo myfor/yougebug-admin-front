@@ -85,4 +85,37 @@ export class ReportQuestionsService {
       catchError(this.base.handleError)
     );
   }
+
+  //  忽略
+  ignore(questionId: number): Observable<Result> {
+    const URL = `${ROUTER_PREFIX}/api/QuestionReports/${questionId}/ignore`;
+    return this.http.put<Result>(URL, '')
+    .pipe(
+      debounceTime(1000),
+      retry(1),
+      catchError(this.base.handleError)
+    );
+  }
+
+  //  退回
+  back(questionId: number, reason: string): Observable<Result> {
+    const URL = `${ROUTER_PREFIX}/api/QuestionReports/${questionId}/back`;
+    return this.http.put<Result>(URL, reason)
+    .pipe(
+      debounceTime(1000),
+      retry(1),
+      catchError(this.base.handleError)
+    );
+  }
+
+  //  删除
+  delete(questionId: number): Observable<Result> {
+    const URL = `${ROUTER_PREFIX}/api/QuestionReports/${questionId}/delete`;
+    return this.http.put<Result>(URL, '')
+    .pipe(
+      debounceTime(1000),
+      retry(1),
+      catchError(this.base.handleError)
+    );
+  }
 }

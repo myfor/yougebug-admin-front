@@ -18,6 +18,8 @@ export class ReportsDetailComponent implements OnInit {
   totalReportSize = 0;
   reports: Report[] = [];
 
+  tip = '';
+
   constructor(
     private common: CommonService,
     private reportQuestion: ReportQuestionsService,
@@ -63,7 +65,14 @@ export class ReportsDetailComponent implements OnInit {
       this.common.snackOpen('请输入“确认删除”来删除');
       return;
     }
-
+    this.reportQuestion.delete(this.id).subscribe(r => {
+      if (r.isFault) {
+        this.common.snackOpen(r.message, 3000);
+      } else {
+        this.common.snackOpen('删除成功');
+        this.tip = `已删除`;
+      }
+    });
   }
 
   //  退回提问
@@ -71,11 +80,27 @@ export class ReportsDetailComponent implements OnInit {
     reason = reason.trim();
     if (!reason) {
       this.common.snackOpen('请输入退回理由', 3000);
+      return;
     }
+    this.reportQuestion.back(this.id, reason).subscribe(r => {
+      if (r.isFault) {
+        this.common.snackOpen(r.message, 3000);
+      } else {
+        this.common.snackOpen('退回成功');
+        this.tip = `已退回：${reason}`;
+      }
+    });
   }
 
   //  忽略这次举报
   ignore() {
-
+    this.reportQuestion.ignore(this.id).subscribe(r => {
+      if (r.isFault) {
+        this.common.snackOpen(r.message, 3000);
+      } else {
+        this.common.snackOpen('忽略成功');
+        this.tip = '已忽略';
+      }
+    });
   }
 }
