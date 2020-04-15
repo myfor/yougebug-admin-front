@@ -100,7 +100,7 @@ export class ReportQuestionsService {
   //  退回
   back(questionId: number, reason: string): Observable<Result> {
     const URL = `${ROUTER_PREFIX}/api/QuestionReports/${questionId}/back`;
-    return this.http.put<Result>(URL, reason)
+    return this.http.put<Result>(URL, { content: reason })
     .pipe(
       debounceTime(1000),
       retry(1),

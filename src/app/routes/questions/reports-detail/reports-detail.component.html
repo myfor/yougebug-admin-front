@@ -13,7 +13,7 @@
     </mat-form-field>
     <button mat-raised-button color="accent" (click)="back(txt_reason.value)">退回处理</button>
     &nbsp;&nbsp;
-    <button mat-raised-button color="primary">忽略处理</button>
+    <button mat-raised-button color="primary" (click)="ignore()">忽略处理</button>
   </div>
   <div *ngIf="tip" class="w-100">{{tip}}</div>
 </div>
