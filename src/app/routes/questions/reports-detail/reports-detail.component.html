@@ -1,6 +1,10 @@
 <page-header></page-header>
 <div class="back">
   <app-back></app-back>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <div>
+    <a mat-stroked-button [routerLink]="['/questions/', id]">提问详情</a>
+  </div>
   &nbsp;&nbsp;
   <div *ngIf="!tip" class="w-100">
     <mat-form-field>

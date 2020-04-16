@@ -56,8 +56,12 @@ export class QuestionDetailComponent implements OnInit {
   }
 
   //  禁用
-  disabled() {
-    this.question.disabledQuestion(this.id)
+  disabled(reason: string) {
+    if (!reason) {
+      this.common.snackOpen('必须输入禁用/退回理由');
+      return;
+    }
+    this.question.disabledQuestion(this.id, reason)
     .subscribe(r => {
       if (r.isFault) {
         this.common.snackOpen(r.message, 3000);

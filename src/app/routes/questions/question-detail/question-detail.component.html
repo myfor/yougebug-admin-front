@@ -3,10 +3,15 @@
   <div class="container flex-column">
     <div class="back">
       <app-back></app-back>
-      &nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;
       <div [ngSwitch]="detail.state.key">
         <button mat-stroked-button color="primary" *ngSwitchCase="0" (click)="enabled()">启用</button>
-        <button mat-stroked-button color="warn" *ngSwitchCase="1" (click)="disabled()">禁用</button>
+        <ng-container *ngSwitchCase="1">
+          <mat-form-field>
+            <input type="text" matInput placeholder="请输入禁用/退回理由" #txt_reason>
+          </mat-form-field>
+          <button mat-stroked-button color="warn" (click)="disabled(txt_reason.value)">禁用</button>
+        </ng-container>
       </div>
     </div>
     <div class="d-title">

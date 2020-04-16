@@ -76,7 +76,7 @@ export class QuestionsListComponent implements OnInit {
         currentItem.state.value = State.enabled.value;
       });
     } else {
-      this.question.disabledQuestion(currentId)
+      this.question.disabledQuestion(currentId, '于列表禁用')
       .subscribe(r => {
         if (r.isFault) {
           this.common.snackOpen(r.message, 3000);

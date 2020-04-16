@@ -98,9 +98,9 @@ export class QuestionsService {
   }
 
   //  禁用提问
-  disabledQuestion(id: number) {
-    const URL = `${ROUTER_PREFIX}/api/questions/${id}/back?descpiption=`;
-    return this.http.patch<Result>(URL, '')
+  disabledQuestion(id: number, reason: string) {
+    const URL = `${ROUTER_PREFIX}/api/questions/${id}/back`;
+    return this.http.patch<Result>(URL, { content: reason })
     .pipe(
       debounceTime(500),
       retry(1),
