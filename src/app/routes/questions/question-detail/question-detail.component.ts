@@ -14,31 +14,7 @@ export class QuestionDetailComponent implements OnInit {
 
   id: number;
 
-  detail: QuestionDetail
-  = {
-    title: '',
-    description: ``,
-    state: {
-      key: 0,
-      value: ''
-    },
-    createDate: '0001-01-01',
-    tags: [],
-    votes: 0,
-    views: 0,
-    user: {
-      id: 0,
-      account: '',
-      avatar: 'assets/images/avatar.png'
-    },
-    page: {
-      index: 1,
-      size: 0,
-      totalRows: 0,
-      totalPages: 0,
-      list: []
-    }
-  };
+  detail: QuestionDetail = this.question.emtpyQuestionDetail;
 
   constructor(
     private question: QuestionsService,
@@ -48,7 +24,7 @@ export class QuestionDetailComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.id = parseInt(this.route.snapshot.paramMap.get('id'), null);
+    this.id = +this.route.snapshot.paramMap.get('id');
     this.getDetail();
   }
 
@@ -103,6 +79,17 @@ export class QuestionDetailComponent implements OnInit {
         return;
       } else {
         this.detail.page = r.data;
+      }
+    });
+  }
+
+  //  删除追问
+  deleteComment(commentId: number) {
+    this.question.deleteComment(commentId).subscribe(r => {
+      if (r.isFault) {
+        this.common.snackOpen(r.message, 3000);
+      } else {
+        this.detail.comments = this.detail.comments.filter(c => c.key !== commentId);
       }
     });
   }

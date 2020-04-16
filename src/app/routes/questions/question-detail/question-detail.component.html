@@ -35,9 +35,28 @@
     </div>
     <small>提问描述：</small>
     <markdown [data]="detail.description"></markdown>
-      <div *ngFor="let answer of detail.page.list">
-        <app-answers-item [answer]="answer"></app-answers-item>
-      </div>
+
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{detail.comments.length}}条追问
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <div class="comment-box" *ngFor="let comment of detail.comments">
+          <div class="comment-description">{{comment.value}}</div>
+          <div class="comment-actions">
+            <button mat-button color="warn" (click)="deleteComment(comment.key)">删除</button>
+          </div>
+        </div>
+
+      </mat-expansion-panel>
+    </mat-accordion>
+
+    <div *ngFor="let answer of detail.page.list">
+      <app-answers-item [answer]="answer"></app-answers-item>
+    </div>
     <mat-paginator showFirstLastButtons [pageSize]="detail.page.size" [length]="detail.page.totalRows"
       (page)="pageChange($event)"></mat-paginator>
   </div>

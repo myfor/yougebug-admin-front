@@ -21,6 +21,7 @@ export interface QuestionDetail {
   state: KeyValue<number, string>;
   createDate: string;
   tags: string[];
+  comments: KeyValue<number, string>[];
   votes: number;
   views: number;
   user: UserInfo;
@@ -107,4 +108,41 @@ export class QuestionsService {
     );
   }
 
+  //  删除追问
+  deleteComment(commentId: number): Observable<Result> {
+    const URL = `${ROUTER_PREFIX}/api/questions/comments/${commentId}`;
+    return this.http.delete<Result>(URL)
+    .pipe(
+      debounceTime(500),
+      catchError(this.base.handleError)
+    );
+  }
+
+  get emtpyQuestionDetail(): QuestionDetail {
+    return {
+      title: '',
+      description: ``,
+      state: {
+        key: 0,
+        value: ''
+      },
+      createDate: '0001-01-01',
+      tags: [],
+      votes: 0,
+      views: 0,
+      comments: [],
+      user: {
+        id: 0,
+        account: '',
+        avatar: 'assets/images/avatar.png'
+      },
+      page: {
+        index: 1,
+        size: 0,
+        totalRows: 0,
+        totalPages: 0,
+        list: []
+      }
+    }
+  }
 }
